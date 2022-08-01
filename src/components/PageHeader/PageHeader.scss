@@ -1,0 +1,21 @@
+@use '../../styles/partials/colors';
+@use '../../styles/partials/mixins';
+
+.header {
+    
+    &__menu {
+        width: 2rem;
+    }
+
+    &__search {
+        width: 2rem;
+    }
+
+    // &__greeting {
+        
+    // }
+
+    // &__date {
+        
+    // }
+}

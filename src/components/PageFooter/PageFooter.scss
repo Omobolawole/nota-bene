@@ -1,0 +1,25 @@
+@use '../../styles/partials/colors';
+@use '../../styles/partials/mixins';
+
+.footer {
+
+    &__nav {
+
+    }
+    
+    &__menu {
+        width: 2rem;
+    }
+
+    &__search {
+        width: 2rem;
+    }
+
+    // &__greeting {
+        
+    // }
+
+    // &__date {
+        
+    // }
+}

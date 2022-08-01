@@ -1,0 +1,25 @@
+@use './colors';
+@use './screens';
+
+
+@mixin mobile-heading {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+@mixin tablet-heading {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+@mixin tablet {
+    @media (min-width: screens.$tablet-breakpoint) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media (min-width: screens.$desktop-breakpoint) {
+        @content;
+    }
+}

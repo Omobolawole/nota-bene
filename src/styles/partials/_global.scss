@@ -1,0 +1,19 @@
+@use './fonts';
+@use './mixins';
+
+
+body {
+    font-family: 'Roboto';
+    font-weight: 400;
+    font-style: normal;
+    margin: 0;
+    padding: 1rem;
+
+    @include mixins.tablet {
+        padding: 3rem;
+    }
+
+    @include mixins.desktop {
+        padding: 8rem;
+    }
+}
