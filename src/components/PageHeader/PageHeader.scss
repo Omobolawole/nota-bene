@@ -2,7 +2,12 @@
 @use '../../styles/partials/mixins';
 
 .header {
-    
+
+    &__nav {
+        display: flex;
+        justify-content: space-between;
+    }
+
     &__menu {
         width: 2rem;
     }

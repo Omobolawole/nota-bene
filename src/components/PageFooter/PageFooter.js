@@ -18,8 +18,8 @@ const PageFooter = () => {
                             className='footer__item'
                             activeClassName='footer__item--active'
                         >
-                            <img src={homeIcon} alt='home icon' />
-                            <p>Home</p>
+                            <img src={homeIcon} alt='home icon' className='footer__icon' />
+                            <p className='footer__text'>Home</p>
                         </NavLink>
                     </li>
                     <li>
@@ -28,8 +28,8 @@ const PageFooter = () => {
                             className='footer__item'
                             activeClassName='footer__item--active'
                         >
-                            <img src={notesIcon} alt='notes icon' />
-                            <p>Notes</p>
+                            <img src={notesIcon} alt='notes icon' className='footer__icon' />
+                            <p className='footer__text'>Notes</p>
                         </NavLink>
                     </li>
                     <li>
@@ -38,8 +38,8 @@ const PageFooter = () => {
                             className='footer__item'
                             activeClassName='footer__item--active'
                         >
-                            <img src={listsIcon} alt='lists icon' />
-                            <p>Lists</p>
+                            <img src={listsIcon} alt='lists icon' className='footer__icon' />
+                            <p className='footer__text'>Lists</p>
                         </NavLink>
                     </li>
                     <li>
@@ -48,8 +48,8 @@ const PageFooter = () => {
                             className='footer__item'
                             activeClassName='footer__item--active'
                         >
-                            <img src={filesIcon} alt='files icon' />
-                            <p>Files</p>
+                            <img src={filesIcon} alt='files icon' className='footer__icon' />
+                            <p className='footer__text'>Files</p>
                         </NavLink>
                     </li>
                     <li>
@@ -58,8 +58,8 @@ const PageFooter = () => {
                             className='footer__item'
                             activeClassName='footer__item--active'
                         >
-                            <img src={accountIcon} alt='account icon' />
-                            <p>Account</p>
+                            <img src={accountIcon} alt='account icon' className='footer__icon' />
+                            <p className='footer__text'>Account</p>
                         </NavLink>
                     </li>
                 </ul>

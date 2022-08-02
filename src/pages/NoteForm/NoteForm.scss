@@ -1,0 +1,96 @@
+@use '../../styles/partials/colors';
+@use '../../styles/partials/mixins';
+
+.note-form {
+    display: flex;
+    flex-direction: column;
+
+    &__title {
+        margin-bottom: 0.25rem;
+    }
+
+    &__label {
+        font-family: 'Roboto';
+        border: 1px solid colors.$primary-grey;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+        outline: none;
+        margin-bottom: 1.5rem;
+        padding: 0.5rem;
+
+        @include mixins.desktop {
+            margin-bottom: 1.75rem;
+        }
+
+        &:focus {
+            border: 2px solid colors.$primary-black;
+        }
+
+        &::placeholder {
+            color: colors.$primary-grey;
+            
+            @include mixins.tablet {
+                font-size: 0.9rem;
+            }
+        }
+
+        &--error {
+            border: 2px solid colors.$error;
+        }
+    }
+
+    &__content {
+        font-family: 'Roboto';
+        border: 1px solid colors.$primary-grey;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+        resize: none;
+        outline: none;
+        margin-bottom: 1.5rem;
+        padding: 0.5rem 0.5rem 4rem 0.5rem;
+
+        @include mixins.desktop {
+            margin-bottom: 1.75rem;
+        }
+
+        &:focus {
+            border: 2px solid colors.$primary-black;
+        }
+
+        &::placeholder {
+            color: colors.$primary-grey;
+            
+            @include mixins.tablet {
+                font-size: 0.9rem;
+            }
+        }
+
+        &--error {
+            border: 2px solid colors.$error;
+        }
+
+        &__button {
+            font-family: "Roboto";
+            border: none;
+            border-radius: 50%;
+            // background-repeat: no-repeat;
+            // background-position: 5% center;
+            // background-size: 1.35rem;
+            // font-size: 0.8125rem;
+            font-weight: 700;
+            // height: 2.25rem;
+            // width: 100%;
+            // display: flex;
+            // justify-content: center;
+            // align-items: center;
+
+            &:hover {
+                background-color: colors.$primary-black;
+            }
+
+            @include mixins.tablet {
+                width: auto;
+            }
+        }
+    }
+}
