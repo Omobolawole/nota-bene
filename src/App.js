@@ -9,13 +9,12 @@ import PageFooter from './components/PageFooter/PageFooter';
 function App() {
   return (
     <Router>
-      <PageHeader />
+      {/* <PageHeader /> */}
       <Switch>
         {/* <Route path='/signup' component={SignupPage} /> */}
         {/* <Route path='/login' component={LoginPage} /> */}
         <Route path='/' exact component={Dashboard} />
         <Route path='/notes' component={NotesPage} />
-        {/* <Route path='/notes/:noteId' component={NotesPage} /> */}
         <Route 
             path='/note/:noteId/edit' 
             exact
@@ -28,7 +27,7 @@ function App() {
           />
         {/* <Route path='/lists' component={ListsPage} /> */}
       </Switch>
-      <PageFooter />
+      {/* <PageFooter /> */}
     </Router>
   );
 }

@@ -74,8 +74,6 @@ const NoteForm = ({ status }) => {
             });
     }, [noteId]);
 
-
-
     return (
         <form className='note-form'>
             <label className='note-form__title'>

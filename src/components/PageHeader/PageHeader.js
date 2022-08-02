@@ -2,11 +2,11 @@ import menuIcon from '../../assets/icons/menu.svg';
 import searchIcon from '../../assets/icons/search.svg';
 import './PageHeader.scss';
 
-const PageHeader = () => {
+const PageHeader = ({ onShow }) => {
     return (
         <header className='header'>
             <nav className='header__nav'>
-                <img src={menuIcon} alt='menu icon' className='header__menu' />
+                <img src={menuIcon} alt='menu icon' className='header__menu' onClick={onShow} />
                 <img src={searchIcon} alt='search icon' className='header__search' />
             </nav>
             <div className='header__title'>

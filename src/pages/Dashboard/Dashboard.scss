@@ -53,10 +53,6 @@
         width: 100%;
     }
 
-    &__add-link {
-        text-decoration: none;
-    }
-
     &__add-text {
         display: flex;
         justify-content: center;
@@ -67,5 +63,34 @@
         background-color: colors.$primary-black;
         margin: 0;
         border-radius: 4px;
+    }
+
+    &__buttons {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        transition: all 0.5s;
+        border: none;
+        margin-bottom: 7rem;
+
+        &--hidden {
+            display: none;
+        }
+    }
+
+    &__button {
+        font-family: "Roboto";
+        font-weight: 700;
+        border: none;
+        background-color: colors.$primary-black;
+        color: colors.$primary-white;
+        padding: 1rem 0;
+        margin-top: 1rem;
+        width: 100%;
+        border-radius: 4px;
+
+        // &:hover {
+            
+        // }
     }
 }

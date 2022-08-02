@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import closeIcon from '../../assets/icons/close.svg';
 import homeIcon from '../../assets/icons/home.svg';
 import notesIcon from '../../assets/icons/notes.svg';
 import listsIcon from '../../assets/icons/lists.svg';
@@ -6,10 +7,11 @@ import filesIcon from '../../assets/icons/files.svg';
 import accountIcon from '../../assets/icons/account.svg';
 import './PageFooter.scss';
 
-const PageFooter = () => {
+const PageFooter = ({ onShow, onHide }) => {
     return (
-        <footer className='footer'>
+        <footer className={onShow ? 'footer' : 'footer--hidden'}>
             <nav className='footer__nav'>
+                <img src={closeIcon} alt='close icon' className='footer__close' onClick={onHide} />
                 <ul className='footer__list'>
                     <li>
                         <NavLink
