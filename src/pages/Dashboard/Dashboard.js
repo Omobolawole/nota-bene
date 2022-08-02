@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './Dashboard.scss';
 
 const Dashboard = () => {
@@ -19,9 +20,11 @@ const Dashboard = () => {
                 </p>
             </div>
             <div className='dashboard__add'>
-                <p className='dashboard__add-text'>
-                    + 
-                </p>
+                <Link to='/note/add' className='dashboard__add-link'>
+                    <p className='dashboard__add-text'>
+                        + 
+                    </p>
+                </Link>
             </div>
         </main>
     );

@@ -53,6 +53,10 @@
         width: 100%;
     }
 
+    &__add-link {
+        text-decoration: none;
+    }
+
     &__add-text {
         display: flex;
         justify-content: center;

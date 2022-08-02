@@ -6,16 +6,19 @@ import './NoteForm.scss';
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 const NoteForm = ({ status }) => {
-    const [noteLabel, setNoteLabel] = useState(['']);
-    const [noteContent, setNoteContent] = useState(['']);
+    const [noteLabel, setNoteLabel] = useState(status === 'add' && '');
+    const [noteContent, setNoteContent] = useState(status === 'add' && '');
     const [isError, setIsError] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const { noteId } = useParams();
 
 
-    const handleChange = (event) => {
-        setNoteLabel(event.target.noteLabel.value);
-        setNoteContent(event.target.noteContent.value);
+    const handleChangeLabel = (event) => {
+        setNoteLabel(event.target.value);
+    };
+
+    const handleChangeContent = (event) => {
+        setNoteContent(event.target.value);
     };
 
     const isFormValid = () => {
@@ -36,7 +39,8 @@ const NoteForm = ({ status }) => {
         axios
             .post(`${SERVER_URL}/notes`, {
                 label: noteLabel,
-                note: noteContent
+                note: noteContent,
+                user_id: 2
             }) 
             .then(() => {
                 setIsError(false);
@@ -54,21 +58,23 @@ const NoteForm = ({ status }) => {
         }, 2000)
     }
 
-    // useEffect(() => {
-    //     axios
-    //         .get(`${SERVER_URL}/notes/2/note/${noteId}`)
-    //         .then((response) => {
-    //             console.log(response)
-    //             const selectedNote = response;
+    useEffect(() => {
+        axios
+            .get(`${SERVER_URL}/notes/2/note/${noteId}`)
+            .then((response) => {
+                console.log(response)
+                const selectedNote = response.data;
 
-    //             setNoteLabel(response.label);
-    //             setNoteContent(response.note);
-    //         })
-    //         .catch((error) => {
-    //             console.log(error)
-    //             setIsError(true);
-    //         });
-    // }, [noteId]);
+                setNoteLabel(selectedNote.label);
+                setNoteContent(selectedNote.note);
+            })
+            .catch((error) => {
+                console.log(error)
+                setIsError(true);
+            });
+    }, [noteId]);
+
+
 
     return (
         <form className='note-form'>
@@ -81,7 +87,7 @@ const NoteForm = ({ status }) => {
                 className='note-form__label'
                 name='noteLabel'
                 value={noteLabel}
-                onChange={handleChange}
+                onChange={handleChangeLabel}
             />
 
             <label className='note-form__title'>
@@ -93,11 +99,11 @@ const NoteForm = ({ status }) => {
                 className='note-form__content'
                 name='noteContent'
                 value={noteContent}
-                onChange={handleChange}
+                onChange={handleChangeContent}
             />
             
             <button className='note-form__button' onClick={handleSubmit} >
-                Add Note
+                {status === 'add' ? 'Add Note' : 'Update Note'}
             </button>
         </form>
     );

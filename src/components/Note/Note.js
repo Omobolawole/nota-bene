@@ -4,7 +4,11 @@ import deleteIcon from '../../assets/icons/delete.svg';
 // import { formatDate } from '../../utils/dateUtils';
 import './Note.scss';
 
-const Note = ({ note }) => {
+const Note = ({ note, onDelete }) => {
+    const handleClick = () => {
+        onDelete(note.id);
+    }
+
     return (
         <article className='note'>
             <h3 className='note__label'>{note.label}</h3>
@@ -14,7 +18,7 @@ const Note = ({ note }) => {
                 <Link to={`/note/${note.id}/edit`}>
                     <img src={editIcon} alt='edit icon' className='note__icon' />
                 </Link>
-                <img src={deleteIcon} alt='delete icon' className='note__icon' />
+                <img src={deleteIcon} alt='delete icon' className='note__icon' onClick={handleClick} />
             </div>
         </article>
     );

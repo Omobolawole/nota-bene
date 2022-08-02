@@ -9,7 +9,20 @@ const NotesPage = () => {
     const [notesData, setNotesData] = useState([]);
     const [isError, setIsError] = useState(false);
 
-    useEffect(() => {
+    const handleDelete = (id) => {
+        axios
+            .delete(`${SERVER_URL}/notes/2/note/${id}`)
+            .then((response) => {
+                console.log(response)
+                updateNotes();
+            })
+            .catch((error) => {
+                console.log(error)
+                setIsError(true);
+            })
+    };
+
+    const updateNotes = () => {
         axios
             .get(`${SERVER_URL}/notes/2`)
             .then((response) => {
@@ -22,6 +35,10 @@ const NotesPage = () => {
                 console.log(error)
                 setIsError(true);
             })
+    };
+
+    useEffect(() => {
+        updateNotes();
     }, []);
 
     if (!notesData) {
@@ -40,6 +57,7 @@ const NotesPage = () => {
                        return <Note 
                                 key={note.id}
                                 note={note}
+                                onDelete={handleDelete}
                               />
                     })
                 }
