@@ -2,23 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import axios from 'axios';
 import backIcon from '../../assets/icons/arrow_back.svg';
-import Note from '../../components/Note/Note';
-import './NotesPage.scss';
+import List from '../../components/List/List';
+import './ListsPage.scss';
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
-const NotesPage = () => {
-    const [notesData, setNotesData] = useState([]);
+const ListsPage = () => {
+    const [listsData, setListsData] = useState([]);
     const [isError, setIsError] = useState(false);
 
     const history = useHistory();
 
     const handleDelete = (id) => {
         axios
-            .delete(`${SERVER_URL}/notes/2/note/${id}`)
+            .delete(`${SERVER_URL}/lists/2/list/${id}`)
             .then((response) => {
                 console.log(response)
-                updateNotes();
+                updateLists();
             })
             .catch((error) => {
                 console.log(error)
@@ -26,14 +26,14 @@ const NotesPage = () => {
             })
     };
 
-    const updateNotes = () => {
+    const updateLists = () => {
         axios
-            .get(`${SERVER_URL}/notes/2`)
+            .get(`${SERVER_URL}/lists/2`)
             .then((response) => {
                 console.log(response)
-                const notesDetails = response.data;
+                const listsDetails = response.data;
 
-                setNotesData(notesDetails);
+                setListsData(listsDetails);
             })
             .catch((error) => {
                 console.log(error)
@@ -42,10 +42,10 @@ const NotesPage = () => {
     };
 
     useEffect(() => {
-        updateNotes();
+        updateLists();
     }, []);
 
-    if (!notesData) {
+    if (!listsData) {
         return <p>Getting started...</p>
     }
 
@@ -54,23 +54,23 @@ const NotesPage = () => {
     }
 
     return (
-        <main className='notes'>
-            <div className='notes__nav'>
-                <img src={backIcon} alt='back icon' className='notes__back' onClick={history.goBack}/>
-                <Link to='/note/add' className='notes__link'>
-                    <div className='notes__add'>
-                        <p className='notes__add-text' >
-                            + New Note
+        <main>
+            <div className='lists__nav'>
+                <img src={backIcon} alt='back icon' className='lists__back' onClick={history.goBack}/>
+                <Link to='/list/add' className='lists__link'>
+                    <div className='lists__add'>
+                        <p className='lists__add-text' >
+                            + New List
                         </p>
                     </div>
                 </Link>
             </div>
-            <div className='notes__container'>
+            <div className='lists__container'>
                 {
-                    notesData.map((note) => {
-                       return <Note 
-                                key={note.id}
-                                note={note}
+                    listsData.map((list) => {
+                       return <List 
+                                key={list.id}
+                                list={list}
                                 onDelete={handleDelete}
                               />
                     })
@@ -80,4 +80,4 @@ const NotesPage = () => {
     );
 };
 
-export default NotesPage;
+export default ListsPage;

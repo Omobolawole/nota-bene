@@ -2,8 +2,26 @@
 @use '../../styles/partials/mixins';
 
 .note-form {
-    display: flex;
-    flex-direction: column;
+
+    &__nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 0;
+    }
+
+    &__link {
+        text-decoration: none;
+    }
+
+    &__icon {
+        width: 2rem;
+    }
+
+    &__fields {
+        display: flex;
+        flex-direction: column;
+    }
 
     &__title {
         margin-bottom: 0.25rem;

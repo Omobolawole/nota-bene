@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Redirect } from 'react-router-dom';
+import { useHistory, useParams, Link } from 'react-router-dom';
 import axios from 'axios';
+import backIcon from '../../assets/icons/arrow_back.svg';
+import homeIcon from '../../assets/icons/home.svg';
 import './NoteForm.scss';
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 const NoteForm = ({ status }) => {
-    const [noteLabel, setNoteLabel] = useState(status === 'add' && '');
-    const [noteContent, setNoteContent] = useState(status === 'add' && '');
+    const [noteLabel, setNoteLabel] = useState('');
+    const [noteContent, setNoteContent] = useState('');
     const [isError, setIsError] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const { noteId } = useParams();
 
+    const history = useHistory();
 
     const handleChangeLabel = (event) => {
         setNoteLabel(event.target.value);
@@ -52,10 +55,6 @@ const NoteForm = ({ status }) => {
 
         setNoteLabel('');
         setNoteContent('');
-
-        setTimeout(() => {
-            <Redirect to='/notes' />
-        }, 2000)
     }
 
     useEffect(() => {
@@ -75,35 +74,43 @@ const NoteForm = ({ status }) => {
     }, [noteId]);
 
     return (
-        <form className='note-form'>
-            <label className='note-form__title'>
-                Label
-            </label>
-            <input 
-                type='text'
-                placeholder='Add a label to your note'
-                className='note-form__label'
-                name='noteLabel'
-                value={noteLabel}
-                onChange={handleChangeLabel}
-            />
+        <>
+            <div className='note-form__nav'>
+                <img src={backIcon} alt='back icon' className='note-form__icon' onClick={history.goBack} />
+                <Link to='/' className='note-form__link'>
+                    <img src={homeIcon} alt='home icon' className='note-form__icon' />
+                </Link>
+            </div>
+            <form className='note-form__fields'>
+                <label className='note-form__title'>
+                    Label
+                </label>
+                <input 
+                    type='text'
+                    placeholder='Add a label to your note'
+                    className='note-form__label'
+                    name='noteLabel'
+                    value={noteLabel}
+                    onChange={handleChangeLabel}
+                />
 
-            <label className='note-form__title'>
-                Note
-            </label>
-            <textarea
-                type='text'
-                placeholder='Add your note'
-                className='note-form__content'
-                name='noteContent'
-                value={noteContent}
-                onChange={handleChangeContent}
-            />
-            
-            <button className='note-form__button' onClick={handleSubmit} >
-                {status === 'add' ? 'Add Note' : 'Update Note'}
-            </button>
-        </form>
+                <label className='note-form__title'>
+                    Note
+                </label>
+                <textarea
+                    type='text'
+                    placeholder='Add your note'
+                    className='note-form__content'
+                    name='noteContent'
+                    value={noteContent}
+                    onChange={handleChangeContent}
+                />
+                
+                <button className='note-form__button' onClick={handleSubmit} >
+                    {status === 'add' ? 'Add Note' : 'Update Note'}
+                </button>
+            </form>
+        </>
     );
 };
 

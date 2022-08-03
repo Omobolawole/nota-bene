@@ -1,15 +1,13 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.scss';
-import PageHeader from './components/PageHeader/PageHeader';
 import Dashboard from './pages/Dashboard/Dashboard';
 import NotesPage from './pages/NotesPage/NotesPage';
 import NoteForm from './pages/NoteForm/NoteForm';
-import PageFooter from './components/PageFooter/PageFooter';
+import ListsPage from './pages/ListsPage/ListsPage';
 
 function App() {
   return (
     <Router>
-      {/* <PageHeader /> */}
       <Switch>
         {/* <Route path='/signup' component={SignupPage} /> */}
         {/* <Route path='/login' component={LoginPage} /> */}
@@ -25,9 +23,8 @@ function App() {
             exact
             render={(routerProps) => <NoteForm status='add' {...routerProps} />} 
           />
-        {/* <Route path='/lists' component={ListsPage} /> */}
+        <Route path='/lists' component={ListsPage} />
       </Switch>
-      {/* <PageFooter /> */}
     </Router>
   );
 }

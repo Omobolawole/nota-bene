@@ -10,7 +10,7 @@ const PageHeader = ({ onShow }) => {
                 <img src={searchIcon} alt='search icon' className='header__search' />
             </nav>
             <div className='header__title'>
-                <h3 className='header__greeting'>Welcome back Anastasia!</h3>
+                <h3 className='header__greeting'>Welcome back Ana!</h3>
                 <p className='header__date'>Thursday, 13th May, 2022</p>
             </div>
         </header>
