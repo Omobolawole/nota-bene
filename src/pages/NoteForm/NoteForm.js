@@ -31,6 +31,11 @@ const NoteForm = ({ status }) => {
         return true;
     };
 
+    const handleCancel = (event) => {
+        event.preventDefault();
+        history.goBack();
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault();
     
@@ -57,8 +62,11 @@ const NoteForm = ({ status }) => {
         setNoteContent('');
     }
 
+    
+
     useEffect(() => {
-        axios
+        if (status === 'edit') {
+            axios
             .get(`${SERVER_URL}/notes/2/note/${noteId}`)
             .then((response) => {
                 console.log(response)
@@ -71,6 +79,7 @@ const NoteForm = ({ status }) => {
                 console.log(error)
                 setIsError(true);
             });
+        }
     }, [noteId]);
 
     return (
@@ -105,10 +114,14 @@ const NoteForm = ({ status }) => {
                     value={noteContent}
                     onChange={handleChangeContent}
                 />
-                
-                <button className='note-form__button' onClick={handleSubmit} >
-                    {status === 'add' ? 'Add Note' : 'Update Note'}
-                </button>
+                <div className='note-form__buttons'>
+                    <button className='note-form__button' onClick={handleCancel} >
+                        Cancel
+                    </button>
+                    <button className='note-form__button' onClick={handleSubmit} >
+                        {status === 'add' ? 'Add Note' : 'Update Note'}
+                    </button>
+                </div>
             </form>
         </>
     );

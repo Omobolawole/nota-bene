@@ -1,19 +1,47 @@
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import uncheckedIcon from '../../assets/icons/check_box_empty.svg';
+import checkedIcon from '../../assets/icons/check_box_filled.svg';
 import editIcon from '../../assets/icons/edit.svg';
 import deleteIcon from '../../assets/icons/delete.svg';
 // import { formatDate } from '../../utils/dateUtils';
 import './List.scss';
 
 const List = ({ list, onDelete }) => {
+    // const [itemsData, setItemsData] = useState([]);
+    const [isChecked, setIsChecked] = useState(false)
+
+    const handelCheck = () => {
+        setIsChecked(true);
+    };
+    
+    const handelUncheck = () => {
+        setIsChecked(false);
+    };
+
     const handleClick = () => {
         onDelete(list.id);
-    }
+    };
+
+    const listsObject = JSON.parse(list.list);
+    const listItems = Object.keys(listsObject);
 
     return (
         <article className='list'>
             <h3 className='list__label'>{list.label}</h3>
             <p className='list__date'>{list.updated_at}</p>
-            <p className='list__content'>{list.list}</p>
+            <ul className='list__content'>
+                {
+                    listItems.map((item, index) => {
+                        return (
+                            <div className='list__group' key={index} >
+                                <img src={isChecked ? checkedIcon : uncheckedIcon} alt='checkbox icon' className='list__icon' onClick={handelCheck} />
+                                <li className='list__item'>{listsObject[item]}</li>
+                            </div>
+                        );
+                    })
+                }
+            </ul>
             <div className='list__icons'>
                 <Link to={`/list/${list.id}/edit`}>
                     <img src={editIcon} alt='edit icon' className='list__icon' />

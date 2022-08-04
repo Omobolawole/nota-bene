@@ -15,7 +15,7 @@
     }
 
     &__icon {
-        width: 2rem;
+        width: 1.5rem;
     }
 
     &__fields {
@@ -88,12 +88,19 @@
         }
     }
 
+    &__buttons {
+        display: flex;
+        flex-direction: column;
+    }
+
     &__button {
         font-family: "Roboto";
         border: none;
         border-radius: 4px;
         font-weight: 700;
         padding: 0.5rem 0;
+        width: 100%;
+        margin-bottom: 1rem;
 
         &:hover {
             background-color: colors.$primary-black;

@@ -13,6 +13,25 @@
     //     font-weight: 700;
     // }
 
+    &__content {
+        padding: 0 1rem;
+    }
+
+    &__group {
+        display: flex;
+        align-items: flex-start;
+    }
+
+    &__item {
+        padding: 0 1rem 0.5rem 0.5rem;
+        list-style-type: none;
+        // list-style-image: url('../../assets/icons/check_box_empty.svg');
+
+        // &--checked {
+        //     list-style-image: url('../../assets/icons/check_box_filled.svg');
+        // }
+    }
+
     &__icons {
         display: flex;
         justify-content: space-between;
