@@ -11,10 +11,12 @@ const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 const Dashboard = () => {
     const [isAuthenticating, setIsAuthenticating] = useState(true);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [userName, setUserName] = useState('');
+    const [user, setUser] = useState(null);
     const [showNav, setShowNav] = useState(false);
     const [showOptions, setShowOptions] = useState(false);
     const ref = useRef(null);
+
+    const authToken = sessionStorage.getItem('authToken');
 
     const handleLogin = () => {
         setIsLoggedIn(true);
@@ -41,13 +43,39 @@ const Dashboard = () => {
         setShowOptions(false);
     };
 
+    const handleLogout = () => {
+        setIsAuthenticating(true);
+        setIsLoggedIn(false);
+        setUser(null);
+        sessionStorage.removeItem('authToken');
+    }
+
     useEffect(() => {
+        if(authToken) {
             axios
+                .get(`${SERVER_URL}/users/current`, {
+                    headers: {
+                        Authorization: `Bearer ${authToken}`
+                    }
+                })
+                .then((response) => {
+                    setIsAuthenticating(false);
+                    setIsLoggedIn(true);
+                    setUser(response.data);
+                })
+                .catch((error) => {
+                    console.log(`Error Authenticating: ${error}`);
+                });
+        };
+    }, [])
+
+    useEffect(() => {
+        axios
             .get(`${SERVER_URL}/auth/profile`, { withCredentials: true })
             .then((response) => {
                 setIsAuthenticating(false);
                 setIsLoggedIn(true);
-                setUserName(response.data.username.split(' ')[0])
+                setUser(response.data);
             })
             .catch((error) => {
                 if (error.response.status === 401) {
@@ -66,9 +94,9 @@ const Dashboard = () => {
     return (
         <>
             {isLoggedIn ? (
-                userName && 
+                user && 
                     <>
-                        <PageHeader username={userName} onShow={handleShowNav} />
+                        <PageHeader user={user} onShow={handleShowNav} />
                         <main className='dashboard'>
                             <div className='dashboard__hero'>
                                 <p className='dashboard__hero-text'>
@@ -108,7 +136,7 @@ const Dashboard = () => {
                                 </Link>
                             </div>
 
-                            <a href={`${SERVER_URL}/auth/logout`}>
+                            <a href={`${SERVER_URL}/auth/logout`} onClick={authToken && handleLogout}>
                                 Log Out
                             </a>
                         </main>

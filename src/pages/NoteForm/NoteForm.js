@@ -34,7 +34,7 @@ const NoteForm = ({ status }) => {
     const handleCancel = (event) => {
         event.preventDefault();
         history.goBack();
-    }
+    };
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -60,9 +60,7 @@ const NoteForm = ({ status }) => {
 
         setNoteLabel('');
         setNoteContent('');
-    }
-
-    
+    };
 
     useEffect(() => {
         if (status === 'edit') {

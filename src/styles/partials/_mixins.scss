@@ -12,6 +12,84 @@
     font-weight: 700;
 }
 
+@mixin mobile-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+}
+
+@mixin mobile-card {
+    font-size: 0.75rem;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+@mixin input {
+    font-family: 'Roboto';
+    border: 1px solid colors.$primary-grey;
+    border-radius: 4px;
+    outline: none;
+    padding: 0.5rem;
+
+    &:focus {
+        border: 2px solid colors.$primary-black;
+    }
+
+    &::placeholder {
+        color: colors.$primary-grey;
+    }
+
+    &--error {
+        border: 2px solid colors.$error;
+    }
+}
+
+@mixin textarea {
+    font-family: 'Roboto';
+    border: 1px solid colors.$primary-grey;
+    border-radius: 4px;
+    resize: none;
+    outline: none;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem 0.5rem 10rem 0.5rem;
+    
+    &:focus {
+        border: 2px solid colors.$primary-black;
+    }
+
+    &::placeholder {
+        color: colors.$primary-grey;
+    }
+
+    &--error {
+        border: 2px solid colors.$error;
+    }
+}
+
+@mixin button {
+    font-family: "Roboto";
+    border: none;
+    border-radius: 4px;
+    font-weight: 700;   
+    width: 100%;
+    
+
+    &:hover {
+        background-color: colors.$primary-black;
+        color: colors.$primary-white;
+    }
+}
+
+@mixin validation {
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding-bottom: 0.5rem;
+    text-align: center;
+}
+
 @mixin tablet {
     @media (min-width: screens.$tablet-breakpoint) {
         @content;

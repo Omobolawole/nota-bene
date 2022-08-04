@@ -2,7 +2,7 @@ import menuIcon from '../../assets/icons/menu.svg';
 import searchIcon from '../../assets/icons/search.svg';
 import './PageHeader.scss';
 
-const PageHeader = ({ username, onShow }) => {
+const PageHeader = ({ user, onShow }) => {
     return (
         <header className='header'>
             <nav className='header__nav'>
@@ -10,7 +10,7 @@ const PageHeader = ({ username, onShow }) => {
                 <img src={searchIcon} alt='search icon' className='header__search' />
             </nav>
             <div className='header__title'>
-                <h3 className='header__greeting'>{`Welcome ${username}!`}</h3>
+                <h3 className='header__greeting'>{`Welcome ${user.username.split(' ')[0]}!`}</h3>
                 <p className='header__date'>Thursday, 13th May, 2022</p>
             </div>
         </header>

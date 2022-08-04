@@ -4,10 +4,7 @@
 .note-form {
 
     &__nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem 0;
+        @include mixins.mobile-nav;
     }
 
     &__link {
@@ -28,63 +25,19 @@
     }
 
     &__label {
-        font-family: 'Roboto';
-        border: 1px solid colors.$primary-grey;
-        border-radius: 4px;
-        margin-bottom: 1rem;
-        outline: none;
+        @include mixins.input;
         margin-bottom: 1.5rem;
-        padding: 0.5rem;
 
         @include mixins.desktop {
             margin-bottom: 1.75rem;
-        }
-
-        &:focus {
-            border: 2px solid colors.$primary-black;
-        }
-
-        &::placeholder {
-            color: colors.$primary-grey;
-            
-            @include mixins.tablet {
-                font-size: 0.9rem;
-            }
-        }
-
-        &--error {
-            border: 2px solid colors.$error;
         }
     }
 
     &__content {
-        font-family: 'Roboto';
-        border: 1px solid colors.$primary-grey;
-        border-radius: 4px;
-        margin-bottom: 1rem;
-        resize: none;
-        outline: none;
-        margin-bottom: 1.5rem;
-        padding: 0.5rem 0.5rem 10rem 0.5rem;
+        @include mixins.textarea;
 
         @include mixins.desktop {
             margin-bottom: 1.75rem;
-        }
-
-        &:focus {
-            border: 2px solid colors.$primary-black;
-        }
-
-        &::placeholder {
-            color: colors.$primary-grey;
-            
-            @include mixins.tablet {
-                font-size: 0.9rem;
-            }
-        }
-
-        &--error {
-            border: 2px solid colors.$error;
         }
     }
 
@@ -94,18 +47,9 @@
     }
 
     &__button {
-        font-family: "Roboto";
-        border: none;
-        border-radius: 4px;
-        font-weight: 700;
+        @include mixins.button;
         padding: 0.5rem 0;
-        width: 100%;
         margin-bottom: 1rem;
-
-        &:hover {
-            background-color: colors.$primary-black;
-            color: colors.$primary-white;
-        }
 
         @include mixins.tablet {
             width: auto;

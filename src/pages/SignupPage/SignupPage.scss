@@ -1,0 +1,90 @@
+@use '../../styles/partials/colors';
+@use '../../styles/partials/mixins';
+
+.signup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem 0;
+
+    &__logo {
+        height: 7rem;
+        width: 5rem;
+        object-fit: cover;
+    }
+
+    &__heading {
+        text-transform: uppercase;
+    }
+
+    &__text {
+        font-size: 0.85rem;
+    }
+
+    &__auth-link {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: colors.$primary-black;
+        border: 1px solid colors.$primary-grey;
+        border-radius: 4px;
+        padding: 0.275rem 1rem;
+        width: 80%;
+        font-size: 0.85rem;
+
+        &:hover {
+            background-color: colors.$secondary-grey;
+        }
+    }
+
+    &__auth-logo {
+        width: 1.5rem;
+        margin-right: 1rem;
+    }
+
+    &__or {
+        color: colors.$primary-grey;
+    }
+
+    &__form{
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+    }
+
+    &__input {
+        @include mixins.input;
+        margin-bottom: 1rem;
+        width: 100%;
+    }
+
+    &__error {
+        @include mixins.validation;
+        color: colors.$error;
+    }
+
+    &__success {
+        @include mixins.validation;
+        color: colors.$success;
+    }
+
+    &__request {
+        @include mixins.validation;
+    }
+
+    &__button {
+        @include mixins.button;
+        padding: 0.5rem 0;
+        margin-bottom: 1rem;
+    }
+
+    &__login {
+        font-size: 0.85rem;
+    }
+
+    &__login-link {
+        text-decoration: none;
+        font-weight: 700;
+        color: colors.$primary-color;
+    }
+}
