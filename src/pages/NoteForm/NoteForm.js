@@ -68,6 +68,7 @@ const NoteForm = ({ user, status }) => {
                 .get(`${SERVER_URL}/notes/${user.id}/note/${noteId}`)
                 .then((response) => {
                     console.log(response)
+                    console.log(user)
                     const selectedNote = response.data;
 
                     setNoteLabel(selectedNote.label);
@@ -89,29 +90,32 @@ const NoteForm = ({ user, status }) => {
                 </Link>
             </div>
             <form className='note-form__fields'>
-                <label className='note-form__title'>
+                <label htmlFor='note-label' className='note-form__title'>
                     Label
                 </label>
                 <input 
                     type='text'
                     placeholder='Add a label to your note'
                     className='note-form__label'
+                    id='note-label'
                     name='noteLabel'
                     value={noteLabel}
                     onChange={handleChangeLabel}
                 />
 
-                <label className='note-form__title'>
+                <label htmlFor='note-content' className='note-form__title'>
                     Note
                 </label>
                 <textarea
                     type='text'
                     placeholder='Add your note'
                     className='note-form__content'
+                    id='note-content'
                     name='noteContent'
                     value={noteContent}
                     onChange={handleChangeContent}
                 />
+                
                 <div className='note-form__buttons'>
                     <button className='note-form__button' onClick={handleCancel} >
                         Cancel

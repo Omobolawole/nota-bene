@@ -1,0 +1,59 @@
+@use '../../styles/partials/colors';
+@use '../../styles/partials/mixins';
+
+.list-form {
+
+    &__nav {
+        @include mixins.mobile-nav;
+    }
+
+    &__link {
+        text-decoration: none;
+    }
+
+    &__icon {
+        width: 1.5rem;
+    }
+
+    &__fields {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__title {
+        margin-bottom: 0.25rem;
+    }
+
+    &__label {
+        @include mixins.input;
+        margin-bottom: 1.5rem;
+
+        @include mixins.desktop {
+            margin-bottom: 1.75rem;
+        }
+    }
+
+    &__content {
+        @include mixins.textarea;
+        font-size: 0.95rem;
+        
+        @include mixins.desktop {
+            margin-bottom: 1.75rem;
+        }
+    }
+
+    &__buttons {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__button {
+        @include mixins.button;
+        padding: 0.5rem 0;
+        margin-bottom: 1rem;
+
+        @include mixins.tablet {
+            width: auto;
+        }
+    }
+}

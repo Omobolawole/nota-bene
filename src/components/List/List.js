@@ -24,7 +24,7 @@ const List = ({ list, onDelete }) => {
     };
 
     const listsObject = JSON.parse(list.list);
-    const listItems = Object.keys(listsObject);
+    const listsKeys = Object.keys(listsObject);
 
     return (
         <article className='list'>
@@ -42,12 +42,12 @@ const List = ({ list, onDelete }) => {
                     })
                 } */}
                 {
-                    listItems.map((item, index) => {
+                    listsKeys.map((item, index) => {
                         return (
                             <li className='list__group' key={index} >
                                 {/* <img src={isChecked ? checkedIcon : uncheckedIcon} alt='checkbox icon' className='list__icon' onClick={handelCheck} /> */}
-                                <label className='list__item'>
-                                    <input type='checkbox' className='list__input'/>
+                                <label htmlFor='list-item' className='list__item'>
+                                    <input type='checkbox' className='list__input' id='list-item'/>
                                     <p className='list__text'>
                                         {listsObject[item]}
                                     </p>
@@ -57,7 +57,7 @@ const List = ({ list, onDelete }) => {
                     })
                 }
             </ul>
-            <buttton className='list__check-all' >Check All</buttton>
+            <button className='list__check-all' >Check All</button>
             <div className='list__icons'>
                 <Link to={`/list/${list.id}/edit`}>
                     <img src={editIcon} alt='edit icon' className='list__icon' />
