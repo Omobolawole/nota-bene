@@ -7,7 +7,7 @@ import './NoteForm.scss';
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
-const NoteForm = ({ status }) => {
+const NoteForm = ({ user, status }) => {
     const [noteLabel, setNoteLabel] = useState('');
     const [noteContent, setNoteContent] = useState('');
     const [isError, setIsError] = useState(false);
@@ -48,7 +48,7 @@ const NoteForm = ({ status }) => {
             .post(`${SERVER_URL}/notes`, {
                 label: noteLabel,
                 note: noteContent,
-                user_id: 2
+                user_id: user.id
             }) 
             .then(() => {
                 setIsError(false);
@@ -65,18 +65,18 @@ const NoteForm = ({ status }) => {
     useEffect(() => {
         if (status === 'edit') {
             axios
-            .get(`${SERVER_URL}/notes/2/note/${noteId}`)
-            .then((response) => {
-                console.log(response)
-                const selectedNote = response.data;
+                .get(`${SERVER_URL}/notes/${user.id}/note/${noteId}`)
+                .then((response) => {
+                    console.log(response)
+                    const selectedNote = response.data;
 
-                setNoteLabel(selectedNote.label);
-                setNoteContent(selectedNote.note);
-            })
-            .catch((error) => {
-                console.log(error)
-                setIsError(true);
-            });
+                    setNoteLabel(selectedNote.label);
+                    setNoteContent(selectedNote.note);
+                })
+                .catch((error) => {
+                    console.log(error)
+                    setIsError(true);
+                });
         }
     }, [noteId]);
 

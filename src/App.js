@@ -7,6 +7,7 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import NotesPage from './pages/NotesPage/NotesPage';
 import NoteForm from './pages/NoteForm/NoteForm';
 import ListsPage from './pages/ListsPage/ListsPage';
+import ListForm from './pages/ListForm/ListForm';
 import AccountPage from './pages/AccountPage/AccountPage';
 import './App.scss';
 
@@ -106,22 +107,36 @@ const App = () => {
                     path='/note/:noteId/edit'
                     exact
                     render={(routerProps) => 
-                        <NoteForm status='edit' {...routerProps}/>
+                        <NoteForm user={user} status='edit' {...routerProps}/>
                     } 
                 />
                 <Route 
                     path='/note/add' 
                     exact
                     render={(routerProps) => 
-                        <NoteForm status='add' {...routerProps} />
+                        <NoteForm user={user} status='add' {...routerProps} />
                     } 
-                  />
+                />
                 <Route 
                     path='/lists' 
                     exact 
                     render={(routerProps) => 
                         <ListsPage user={user} {...routerProps} />
                     }
+                />
+                <Route 
+                    path='/list/:listId/edit'
+                    exact
+                    render={(routerProps) => 
+                        <ListForm user={user} status='edit' {...routerProps}/>
+                    } 
+                />
+                <Route 
+                    path='/list/add' 
+                    exact
+                    render={(routerProps) => 
+                        <ListForm user={user} status='add' {...routerProps} />
+                    } 
                 />
                 <Route path='/account' exact component={AccountPage} />
             </Switch>
