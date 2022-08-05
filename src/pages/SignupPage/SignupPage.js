@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import logoImage from '../../assets/images/nota-bene-logo.jpeg';
+import logoImage from '../../assets/logos/nb-logo-gradient.svg';
 import googleImage from '../../assets/images/google-logo.webp';
 import './SignupPage.scss';
 

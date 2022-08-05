@@ -7,7 +7,7 @@ import './ListsPage.scss';
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
-const ListsPage = () => {
+const ListsPage = ({ user }) => {
     const [listsData, setListsData] = useState([]);
     const [isError, setIsError] = useState(false);
 
@@ -15,7 +15,7 @@ const ListsPage = () => {
 
     const handleDelete = (id) => {
         axios
-            .delete(`${SERVER_URL}/lists/2/list/${id}`)
+            .delete(`${SERVER_URL}/lists/${user.id}/list/${id}`)
             .then((response) => {
                 console.log(response)
                 updateLists();
@@ -28,7 +28,7 @@ const ListsPage = () => {
 
     const updateLists = () => {
         axios
-            .get(`${SERVER_URL}/lists/2`)
+            .get(`${SERVER_URL}/lists/${user.id}`)
             .then((response) => {
                 console.log(response)
                 const listsDetails = response.data;

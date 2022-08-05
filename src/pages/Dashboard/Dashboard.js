@@ -1,30 +1,15 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import LoginPage from '../LoginPage/LoginPage';
 import PageHeader from '../../components/PageHeader/PageHeader';
 import PageFooter from '../../components/PageFooter/PageFooter';
 import './Dashboard.scss';
 
-const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+const Dashboard = ({ user, isLoggedIn, onLogout , authToken}) => {
 
-const Dashboard = ({ user, isLoggedIn, authToken, onLogin, onLogout }) => {
-    // const [isAuthenticating, setIsAuthenticating] = useState(true);
-    // const [isLoggedIn, setIsLoggedIn] = useState(false);
-    // const [user, setUser] = useState(null);
     const [showNav, setShowNav] = useState(false);
     const [showOptions, setShowOptions] = useState(false);
     const ref = useRef(null);
-
-    // const isLoggedIn = isLoggedIn;
-    // const authToken = authToken;
-    // const onLogin = onLogin;
-    // const onLogout = onLogout;
-
-    // const authToken = sessionStorage.getItem('authToken');
-
-    // const handleLogin = () => {
-    //     setIsLoggedIn(true);
-    // };
 
     const handleShowNav = () => {
         setShowNav(true);
@@ -42,57 +27,9 @@ const Dashboard = ({ user, isLoggedIn, authToken, onLogin, onLogout }) => {
         setShowNav(false);
     };
 
-    const handleHideOptions = () => {
-        setShowOptions(false);
-    };
-
-    // const handleLogout = () => {
-    //     setIsAuthenticating(true);
-    //     setIsLoggedIn(false);
-    //     setUser(null);
-    //     sessionStorage.removeItem('authToken');
-    // }
-
-    // useEffect(() => {
-    //     if(authToken) {
-    //         axios
-    //             .get(`${SERVER_URL}/users/current`, {
-    //                 headers: {
-    //                     Authorization: `Bearer ${authToken}`
-    //                 }
-    //             })
-    //             .then((response) => {
-    //                 setIsAuthenticating(false);
-    //                 setIsLoggedIn(true);
-    //                 setUser(response.data);
-    //             })
-    //             .catch((error) => {
-    //                 console.log(`Error Authenticating: ${error}`);
-    //             });
-    //     };
-    // })
-
-    // useEffect(() => {
-    //     axios
-    //         .get(`${SERVER_URL}/auth/profile`, { withCredentials: true })
-    //         .then((response) => {
-    //             setIsAuthenticating(false);
-    //             setIsLoggedIn(true);
-    //             setUser(response.data);
-    //         })
-    //         .catch((error) => {
-    //             if (error.response.status === 401) {
-    //                 setIsAuthenticating(false);
-    //                 setIsLoggedIn(false);
-    //             } else {
-    //                 console.log(`Error Authenticating: ${error}`);
-    //             }
-    //         });
-    // }, []);
-
-    // if (isAuthenticating && isLoggedIn ) {
-    //     return <p>Getting Started...</p>
-    // }
+    // const handleHideOptions = () => {
+    //     setShowOptions(false);
+    // };
 
     return (
         <>
@@ -150,7 +87,7 @@ const Dashboard = ({ user, isLoggedIn, authToken, onLogin, onLogout }) => {
                         />
                     </>
             ) : (
-                <LoginPage onLogin={onLogin} />
+                <LoginPage />
             )}
         </>
     );

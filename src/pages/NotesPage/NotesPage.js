@@ -7,7 +7,7 @@ import './NotesPage.scss';
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
-const NotesPage = () => {
+const NotesPage = ({ user }) => {
     const [notesData, setNotesData] = useState([]);
     const [isError, setIsError] = useState(false);
 
@@ -15,7 +15,7 @@ const NotesPage = () => {
 
     const handleDelete = (id) => {
         axios
-            .delete(`${SERVER_URL}/notes/2/note/${id}`)
+            .delete(`${SERVER_URL}/notes/${user.id}/note/${id}`)
             .then((response) => {
                 console.log(response)
                 updateNotes();
@@ -28,7 +28,7 @@ const NotesPage = () => {
 
     const updateNotes = () => {
         axios
-            .get(`${SERVER_URL}/notes/2`)
+            .get(`${SERVER_URL}/notes/${user.id}`)
             .then((response) => {
                 console.log(response)
                 const notesDetails = response.data;

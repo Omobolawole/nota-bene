@@ -1,5 +1,5 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import SignupPage from './pages/SignupPage/SignupPage';
 import LoginPage from './pages/LoginPage/LoginPage';
@@ -13,6 +13,7 @@ import './App.scss';
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 const App = () => {
+
     const [isAuthenticating, setIsAuthenticating] = useState(true);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState(null);
@@ -20,7 +21,9 @@ const App = () => {
     const authToken = sessionStorage.getItem('authToken');
 
     const handleLogin = () => {
+        console.log('rrr')
         setIsLoggedIn(true);
+        <Redirect to="/"/>
     };
 
     const handleLogout = () => {
@@ -39,36 +42,39 @@ const App = () => {
                     }
                 })
                 .then((response) => {
-                    setIsAuthenticating(false);
-                    setIsLoggedIn(true);
+                    console.log(response)
+                    
                     setUser(response.data);
+                    setIsAuthenticating(false);
+                    handleLogin();
+                    
+                    console.log(isLoggedIn)
                 })
                 .catch((error) => {
                     console.log(`Error Authenticating: ${error}`);
                 });
         };
-    })
+    }, [])
 
     useEffect(() => {
-        axios
+        if(!authToken) {
+            axios
             .get(`${SERVER_URL}/auth/profile`, { withCredentials: true })
             .then((response) => {
-                setIsAuthenticating(false);
-                setIsLoggedIn(true);
                 setUser(response.data);
+                setIsAuthenticating(false);
+                handleLogin();
             })
             .catch((error) => {
-                if (error.response.status === 401) {
-                    setIsAuthenticating(false);
-                    setIsLoggedIn(false);
-                } else {
-                    console.log(`Error Authenticating: ${error}`);
-                }
+                console.log(`Error Authenticating: ${error}`);
+                setIsAuthenticating(false);
+                setIsLoggedIn(false);
             });
+        }
     }, []);
 
-    if (isAuthenticating && isLoggedIn ) {
-        return <p>Getting Started...</p>
+    if (isAuthenticating) {
+        return <p>Please wait ...</p>
     }
 
     return (
@@ -82,18 +88,18 @@ const App = () => {
                             user={user} 
                             isLoggedIn={isLoggedIn}
                             authToken={authToken}
-                            onLogin={handleLogin}
                             onLogout={authToken && handleLogout} 
                             {...routerProps} 
                         />
                     }
                 />
-                <Route path='/signup' component={SignupPage} />
-                <Route path='/login' component={LoginPage} />
+                <Route exact path='/signup' component={SignupPage} />
+                <Route exact path='/login' component={LoginPage} />
                 <Route 
                     path='/notes' 
+                    exact 
                     render={(routerProps) => 
-                        <NotesPage {...routerProps} />
+                        <NotesPage user={user} {...routerProps} />
                     } 
                 />
                 <Route 
@@ -112,11 +118,12 @@ const App = () => {
                   />
                 <Route 
                     path='/lists' 
+                    exact 
                     render={(routerProps) => 
-                        <ListsPage {...routerProps} />
+                        <ListsPage user={user} {...routerProps} />
                     }
                 />
-                <Route path='/account' component={AccountPage} />
+                <Route path='/account' exact component={AccountPage} />
             </Switch>
         </Router>
   );

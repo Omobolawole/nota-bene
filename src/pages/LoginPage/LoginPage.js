@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import axios from 'axios';
-import logoImage from '../../assets/images/nota-bene-logo.jpeg';
+import logoImage from '../../assets/logos/nb-logo-gradient.svg';
 import googleImage from '../../assets/images/google-logo.webp';
 import './LoginPage.scss';
 
@@ -11,7 +11,7 @@ const LoginPage = () => {
     const [isSuccess, setIsSuccess] = useState(false);
     const [isError, setIsError] = useState(false);
     const [isAxiosError, setIsAxiosError] = useState(false);
-
+    
     const handleSubmit = (event) => {
         event.preventDefault();
 
@@ -27,14 +27,16 @@ const LoginPage = () => {
 
         if (!email || !password) {
             setIsError(true);
-            return false;
+            return;
         }
 
         axios
             .post(`${SERVER_URL}/users/login`, loginInformation) 
             .then((response) => {
                 console.log(response);
+
                 sessionStorage.setItem('authToken', response.data.token);
+                
                 setIsError(false);
                 setIsSuccess(true);
             })
@@ -75,8 +77,8 @@ const LoginPage = () => {
                 </label>
 
                 {isError && <span className='login__error'>All fields are required to log in</span>}
-                {isSuccess && <Redirect to="/"/>}
-                {isAxiosError && <span className='login__request'>Please try again later</span>}
+                {/* {isSuccess && onLogin} */}
+                {isAxiosError && <span className='login__request'>Error logging in. Please try again later</span>}
 
                 <button className='login__button'>Continue</button>
             </form>
