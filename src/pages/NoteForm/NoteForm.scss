@@ -41,6 +41,20 @@
         }
     }
 
+    &__error {
+        @include mixins.validation;
+        color: colors.$error;
+    }
+
+    &__success {
+        @include mixins.validation;
+        color: colors.$success;
+    }
+
+    &__request {
+        @include mixins.validation;
+    }
+
     &__buttons {
         display: flex;
         flex-direction: column;

@@ -12,6 +12,7 @@ const NoteForm = ({ user, status }) => {
     const [noteContent, setNoteContent] = useState('');
     const [isError, setIsError] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
+    const [isAxiosError, setIsAxiosError] = useState(false);
     const { noteId } = useParams();
 
     const history = useHistory();
@@ -42,28 +43,57 @@ const NoteForm = ({ user, status }) => {
         if (!isFormValid()) {
             setIsError(true);
             return;
-        }
- 
-        axios
-            .post(`${SERVER_URL}/notes`, {
-                label: noteLabel,
-                note: noteContent,
-                user_id: user.id
-            }) 
-            .then(() => {
-                setIsError(false);
-                setIsSuccess(true);
-            })
-            .catch(() => {
-                setIsError(true);
-            });
+        };
 
-        setNoteLabel('');
-        setNoteContent('');
+        if (status === 'edit') {
+            axios
+                .put(`${SERVER_URL}/notes/${user.id}/note/${noteId}`, {
+                    label: noteLabel,
+                    note: noteContent,
+                    user_id: user.id
+                }) 
+                .then(() => {
+                    setIsError(false);
+                    setIsSuccess(true);
+
+                    setTimeout(() => {
+                        history.goBack();
+                    }, 2000)
+                })
+                .catch(() => {
+                    setIsAxiosError(true);
+                });
+
+            setNoteLabel('');
+            setNoteContent('');
+        };
+
+        if (status === 'add') {
+            axios
+                .post(`${SERVER_URL}/notes`, {
+                    label: noteLabel,
+                    note: noteContent,
+                    user_id: user.id
+                }) 
+                .then(() => {
+                    setIsError(false);
+                    setIsSuccess(true);
+
+                    setTimeout(() => {
+                        history.goBack();
+                    }, 2000)
+                })
+                .catch(() => {
+                    setIsAxiosError(true);
+                });
+
+            setNoteLabel('');
+            setNoteContent('');
+        };
     };
 
     useEffect(() => {
-        if (status === 'edit') {
+        if (status === 'edit' && user) {
             axios
                 .get(`${SERVER_URL}/notes/${user.id}/note/${noteId}`)
                 .then((response) => {
@@ -76,7 +106,7 @@ const NoteForm = ({ user, status }) => {
                 })
                 .catch((error) => {
                     console.log(error)
-                    setIsError(true);
+                    setIsAxiosError(true);
                 });
         }
     }, [noteId]);
@@ -96,7 +126,7 @@ const NoteForm = ({ user, status }) => {
                 <input 
                     type='text'
                     placeholder='Add a label to your note'
-                    className='note-form__label'
+                    className={!isError ? 'note-form__label' : 'note-form__label note-form__label--error'}
                     id='note-label'
                     name='noteLabel'
                     value={noteLabel}
@@ -109,12 +139,16 @@ const NoteForm = ({ user, status }) => {
                 <textarea
                     type='text'
                     placeholder='Add your note'
-                    className='note-form__content'
+                    className={!isError ? 'note-form__content' : 'note-form__content note-form__content--error'}
                     id='note-content'
                     name='noteContent'
                     value={noteContent}
                     onChange={handleChangeContent}
                 />
+
+                {isError && <span className='note-form__error'>All fields are required.</span>}
+                {isSuccess && <span className='note-form__success'>Note {status==='add' ? 'added' : 'updated'} successfully!</span>}
+                {isAxiosError && <span className='note-form__request'>Please try again later.</span>}
                 
                 <div className='note-form__buttons'>
                     <button className='note-form__button' onClick={handleCancel} >

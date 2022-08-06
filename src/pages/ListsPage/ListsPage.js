@@ -27,18 +27,20 @@ const ListsPage = ({ user }) => {
     };
 
     const updateLists = () => {
-        axios
+        if(user) {
+            axios
             .get(`${SERVER_URL}/lists/${user.id}`)
             .then((response) => {
                 console.log(response)
                 const listsDetails = response.data;
 
-                setListsData(listsDetails);
+                setListsData(listsDetails.reverse());
             })
             .catch((error) => {
                 console.log(error)
                 setIsError(true);
-            })
+            });
+        }
     };
 
     useEffect(() => {

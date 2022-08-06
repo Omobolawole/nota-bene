@@ -76,9 +76,9 @@ const LoginPage = () => {
                     />
                 </label>
 
-                {isError && <span className='login__error'>All fields are required to log in</span>}
+                {isError && <span className='login__error'>All fields are required to log in.</span>}
                 {/* {isSuccess && onLogin} */}
-                {isAxiosError && <span className='login__request'>Error logging in. Please try again later</span>}
+                {isAxiosError && <span className='login__request'>Error logging in. Please try again later.</span>}
 
                 <button className='login__button'>Continue</button>
             </form>

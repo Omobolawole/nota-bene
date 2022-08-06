@@ -91,9 +91,9 @@ const SignupPage = () => {
                     />
                 </label>
 
-                {isError && <span className='signup__error'>All fields are required to sign up</span>}
+                {isError && <span className='signup__error'>All fields are required to sign up.</span>}
                 {isSuccess && <span className='signup__success'>Sign up successful! Log in below.</span>}
-                {isAxiosError && <span className='signup__request'>Please try again later</span>}
+                {isAxiosError && <span className='signup__request'>Please try again later.</span>}
 
                 <button className='signup__button'>Continue</button>
             </form>

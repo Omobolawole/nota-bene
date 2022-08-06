@@ -27,18 +27,20 @@ const NotesPage = ({ user }) => {
     };
 
     const updateNotes = () => {
-        axios
+        if(user) {
+            axios
             .get(`${SERVER_URL}/notes/${user.id}`)
             .then((response) => {
                 console.log(response)
                 const notesDetails = response.data;
 
-                setNotesData(notesDetails);
+                setNotesData(notesDetails.reverse());
             })
             .catch((error) => {
                 console.log(error)
                 setIsError(true);
-            })
+            });
+        }
     };
 
     useEffect(() => {

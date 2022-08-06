@@ -32,6 +32,19 @@
             margin-bottom: 1.75rem;
         }
     }
+    
+    &__list {
+        margin: 0;
+        padding: 0 2rem;
+    }
+
+    // &__item {
+    //     list-style-type: square;
+    // }
+
+    // &__text {
+    //     list-style-type: square;
+    // }
 
     &__content {
         @include mixins.textarea;
@@ -41,6 +54,21 @@
             margin-bottom: 1.75rem;
         }
     }
+
+    &__error {
+        @include mixins.validation;
+        color: colors.$error;
+    }
+
+    &__success {
+        @include mixins.validation;
+        color: colors.$success;
+    }
+
+    &__request {
+        @include mixins.validation;
+    }
+
 
     &__buttons {
         display: flex;

@@ -15,6 +15,7 @@ const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 const App = () => {
 
+    // const [isGoogle, setIsGoogle] = useState(false); 
     const [isAuthenticating, setIsAuthenticating] = useState(true);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState(null);
@@ -32,7 +33,7 @@ const App = () => {
         setIsLoggedIn(false);
         setUser(null);
         sessionStorage.removeItem('authToken');
-    }
+    };
 
     useEffect(() => {
         if(authToken) {
@@ -58,8 +59,7 @@ const App = () => {
     }, [])
 
     useEffect(() => {
-        if(!authToken) {
-            axios
+        axios
             .get(`${SERVER_URL}/auth/profile`, { withCredentials: true })
             .then((response) => {
                 setUser(response.data);
@@ -71,7 +71,6 @@ const App = () => {
                 setIsAuthenticating(false);
                 setIsLoggedIn(false);
             });
-        }
     }, []);
 
     if (isAuthenticating) {
