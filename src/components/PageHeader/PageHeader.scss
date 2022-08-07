@@ -14,7 +14,14 @@
     }
 
     &__search {
-        width: 1.5em;
+        width: 1.5rem;
+    }
+
+    &__title {
+        @include mixins.tablet {
+            display: flex;
+            justify-content: space-between;
+        }
     }
 
     // &__greeting {

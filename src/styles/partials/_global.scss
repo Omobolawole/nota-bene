@@ -15,5 +15,6 @@ body {
 
     @include mixins.desktop {
         padding: 8rem;
+        margin-left: 10rem;
     }
 }

@@ -29,17 +29,16 @@ const ListsPage = ({ user }) => {
     const updateLists = () => {
         if(user) {
             axios
-            .get(`${SERVER_URL}/lists/${user.id}`)
-            .then((response) => {
-                console.log(response)
-                const listsDetails = response.data;
+                .get(`${SERVER_URL}/lists/${user.id}`)
+                .then((response) => {
+                    const listsDetails = response.data;
 
-                setListsData(listsDetails.reverse());
-            })
-            .catch((error) => {
-                console.log(error)
-                setIsError(true);
-            });
+                    setListsData(listsDetails.reverse());
+                })
+                .catch((error) => {
+                    console.log(error)
+                    setIsError(true);
+                });
         }
     };
 
@@ -62,7 +61,7 @@ const ListsPage = ({ user }) => {
                 <Link to='/list/add' className='lists__link'>
                     <div className='lists__add'>
                         <p className='lists__add-text' >
-                            + New List
+                            + New Item
                         </p>
                     </div>
                 </Link>

@@ -47,8 +47,9 @@
     // }
 
     &__content {
-        @include mixins.textarea;
-        font-size: 0.95rem;
+        @include mixins.input;
+        margin-bottom: 1.5rem;
+        // font-size: 0.95rem;
         
         @include mixins.desktop {
             margin-bottom: 1.75rem;
