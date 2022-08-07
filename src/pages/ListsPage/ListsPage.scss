@@ -1,5 +1,6 @@
 @use '../../styles/partials/colors';
 @use '../../styles/partials/mixins';
+@use '../../styles/partials/variables';
 
 .lists {
 
@@ -13,6 +14,12 @@
 
     &__back {
         width: 1.5rem;
+        transition: transform 0.3s;
+
+        &:hover {
+            transform: variables.$scale;
+            cursor: pointer;
+        }
     }
 
     &__add {
@@ -30,8 +37,22 @@
         padding: 0.5rem;
         // width: 2.5rem;
         color: colors.$primary-white;
-        background-color: colors.$primary-black;
+        background-color: colors.$primary-color;
         margin: 0;
         border-radius: 4px;
+
+        &:hover {
+            background-color: colors.$primary-color-darker;
+            cursor: pointer;
+        }
+    }
+
+    &__container {
+        @include mixins.tablet {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-content: space-evenly;
+        }
     }
 }

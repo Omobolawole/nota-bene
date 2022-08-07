@@ -11,10 +11,18 @@
 
     &__menu {
         width: 1.5rem;
+
+        @include mixins.desktop {
+            width: 2rem;
+        }
     }
 
     &__search {
         width: 1.5rem;
+
+        @include mixins.desktop {
+            width: 2rem;
+        }
     }
 
     &__title {
@@ -24,11 +32,19 @@
         }
     }
 
-    // &__greeting {
-        
-    // }
+    &__greeting {
+        font-size: 1rem;
 
-    // &__date {
-        
-    // }
+        @include mixins.desktop {
+            font-size: 1.5rem;
+        }
+    }
+
+    &__date {
+        font-size: 0.75rem;
+
+        @include mixins.desktop {
+            font-size: 1.2rem;
+        }
+    }
 }

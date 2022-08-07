@@ -47,9 +47,11 @@ const Note = ({ index, note, moveListItem, onDelete }) => {
     // const opacity = isDragging ? 0 : 1
 
     return (
-        <article className='note' ref={dragDropRef} >
-            <h3 className='note__label'>{note.label}</h3>
-            <p className='note__date'>{date}</p>
+        <article className={!isDragging ? 'note' : 'note note--dragging'} ref={dragDropRef} >
+            <div className='note__heading'>
+                <h3 className='note__label'>{note.label}</h3>
+                <p className='note__date'>{date}</p>
+            </div>
             <p className='note__content'>{note.note}</p>
             <div className='note__icons'>
                 <Link to={`/note/${note.id}/edit`}>

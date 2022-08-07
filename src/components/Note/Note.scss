@@ -1,13 +1,37 @@
 @use '../../styles/partials/colors';
 @use '../../styles/partials/mixins';
+@use '../../styles/partials/fonts';
 
 .note {
     @include mixins.mobile-card;
 
-    // &__label {
-    //     font-size: 1rem;
-    //     font-weight: 700;
+    // @include mixins.tablet {
+    //     @include mixins.tablet-card;
     // }
+
+    // &__heading {
+    //     display: flex;
+    //     justify-content: space-between;
+    //     align-items: center;
+    // }
+
+    &__label {
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        font-weight: 700;
+        padding-bottom: 0.25rem;
+        border-bottom: 4px solid colors.$primary-color;
+    }
+
+    &__date {
+        font-weight: 700;
+    }
+
+    &__content {
+        // border-top: 4px solid colors.$primary-color;
+        // border-bottom: 2px solid colors.$primary-color;
+        padding: 1rem 0;
+    }
 
     &__icons {
         display: flex;
@@ -16,5 +40,9 @@
 
     &__icon {
         width: 1rem;
+    }
+
+    &--dragging {
+        opacity: 1;
     }
 }

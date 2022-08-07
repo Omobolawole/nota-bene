@@ -1,5 +1,7 @@
 @use './colors';
 @use './screens';
+@use './fonts';
+@use './variables';
 
 
 @mixin mobile-heading {
@@ -20,11 +22,35 @@
 }
 
 @mixin mobile-card {
+    font-family: 'Lora';
     font-size: 0.75rem;
     padding: 1rem;
     margin: 1rem 0;
     border-radius: 8px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    transition: transform 0.3s;
+
+    &:hover {
+        transform: variables.$scale-smaller;
+        cursor: pointer;
+    }
+}
+
+@mixin tablet-card {
+    font-family: 'Lora';
+    font-size: 0.85rem;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    transition: transform 0.3s;
+    width: 12.5rem;
+    height: fit-content;
+
+    &:hover {
+        transform: variables.$scale-smaller;
+        cursor: pointer;
+    }
 }
 
 @mixin input {
@@ -35,7 +61,7 @@
     padding: 0.5rem;
 
     &:focus {
-        border: 2px solid colors.$primary-black;
+        border: 2px solid colors.$primary-color;
     }
 
     &::placeholder {
@@ -58,7 +84,7 @@
     // padding: 2rem;
     
     &:focus {
-        border: 2px solid colors.$primary-black;
+        border: 2px solid colors.$primary-color;
     }
 
     &::placeholder {

@@ -76,6 +76,11 @@
         @include mixins.button;
         padding: 0.5rem 0;
         margin-bottom: 1rem;
+
+        &:hover {
+            background-color: colors.$primary-color-darker;
+            cursor: pointer;
+        }
     }
 
     &__login {
@@ -86,5 +91,10 @@
         text-decoration: none;
         font-weight: 700;
         color: colors.$primary-color;
+
+        &:hover {
+            color: colors.$primary-color-darker;
+            cursor: pointer;
+        }
     }
 }

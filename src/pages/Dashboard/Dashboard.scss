@@ -1,13 +1,42 @@
 @use '../../styles/partials/colors';
 @use '../../styles/partials/mixins';
+@use '../../styles/partials/variables';
+@use '../../styles/partials/fonts';
 
 .dashboard {
+    margin-bottom: -3rem;
 
     @include mixins.tablet {
         display: flex;
         flex-direction: column;
         align-items: center;
         margin-bottom: -5rem;
+    }
+
+    &__header {
+        width: 100%;
+        height: 3rem;
+        border-bottom: 4px solid colors.$primary-color;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__logo {
+        height: 2.5rem;
+        width: 2.5rem;
+        object-fit: cover;
+        transition: transform 0.3s;
+
+        &:hover {
+            transform: variables.$scale;
+            cursor: pointer;
+        }
+    }
+
+    &__title {
+        text-transform: uppercase;
+        margin-bottom: -0.015rem;
     }
 
     // @include mixins.desktop {
@@ -19,11 +48,12 @@
         height: 30vh;
         border-radius: 4px;
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
         // background-image: url('../../assets/illustrations/sketch-2.svg');
         background-size: cover;
         position: relative;
+        margin-top: 3rem;
 
         @include mixins.tablet {
             width: 70%;
@@ -31,6 +61,29 @@
             margin: 5rem 0;
             display: flex;
             justify-content: space-between;
+        }
+    }
+
+    &__welcome {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__features {
+        text-align: center;
+        font-family: 'Lora';
+        font-weight: 700;
+        color: colors.$primary-color;
+        font-size: 0.75rem;
+
+        @include mixins.tablet {
+            font-size: 0.85rem;
+        }
+
+        @include mixins.desktop {
+            font-size: 1rem;
         }
     }
 
@@ -52,18 +105,33 @@
 
     &__hero-image {
         width: 100%;
+        max-height: 12rem;
+
+        @include mixins.tablet {
+            max-height: 18rem;
+        }
+
+        @include mixins.desktop {
+            max-height: 24rem;
+        }
     }
 
     &__hero-slider {
-        position: absolute;
+        // position: absolute;
         width: 2rem;
+        transition: transform 0.3s;
 
-        &--left {
-            left: 0;
-        }
+        // &--left {
+        //     left: 0;
+        // }
 
-        &--right {
-            right: 0;
+        // &--right {
+        //     right: 0;
+        // }
+
+        &:hover {
+            transform: variables.$scale;
+            cursor: pointer;
         }
     }
 
@@ -71,12 +139,17 @@
         display: flex;
         flex-direction: column;
         width: 100%;
+        font-size: 1rem;
 
         @include mixins.tablet {
             // display: none;
             // flex-direction: row;
             // align-items: center;
             width: 80%;
+        }
+
+        @include mixins.desktop {
+            font-size: 1.2rem;
         }
     }
 
@@ -85,7 +158,7 @@
         justify-content: center;
         align-items: center;
         width: 100%;
-        margin: 2rem 0 1rem 0;
+        margin: 2rem 0 0 0;
         border: 1px solid colors.$primary-grey;
         border-radius: 4px;
 
@@ -151,6 +224,11 @@
         background-color: colors.$primary-color;
         margin: 0;
         border-radius: 4px;
+
+        &:hover {
+            background-color: colors.$primary-color-darker;
+            cursor: pointer;
+        }
     }
 
     &__buttons {
@@ -184,10 +262,14 @@
             width: 10rem;
             margin: 0 1rem;
         }
+
+        @include mixins.desktop {
+            font-size: 1.2rem;
+        }
         
-        // &:hover {
-            
-        // }
+        &:hover {
+            background-color: colors.$primary-color-darker;
+        }
     }
 
     &__text {

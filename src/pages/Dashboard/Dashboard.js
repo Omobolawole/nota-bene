@@ -1,10 +1,13 @@
 import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Swiper from 'swiper/bundle';
+import 'swiper/css/bundle';
 import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css';
 import LoginPage from '../LoginPage/LoginPage';
 import PageHeader from '../../components/PageHeader/PageHeader';
 import PageNav from '../../components/PageNav/PageNav';
+import logoImage from '../../assets/logos/nb-logo-gradient.svg';
 import slideRight from '../../assets/icons/slide_right.svg';
 import slideLeft from '../../assets/icons/slide_left.svg';
 import sketch1 from '../../assets/illustrations/sketch-1.svg';
@@ -20,6 +23,8 @@ const Dashboard = ({ user, isLoggedIn, onLogout , authToken}) => {
     const [showOptions, setShowOptions] = useState(false);
     const ref = useRef(null);
     let [slideNum, setSlideNum] = useState(0);
+
+    // const swiper = new Swiper(...);
 
     const slideImages = [
         {
@@ -45,6 +50,13 @@ const Dashboard = ({ user, isLoggedIn, onLogout , authToken}) => {
     ];
 
     const slideURL = [sketch1, sketch2, sketch3, sketch4, sketch5];
+    const slideCaption = [
+        'NOTA BENE is a simple app tailored to your needs', 
+        'Note your thougths with ease', 
+        'Put down your lists without the pressure of deadlines', 
+        'Keep important details you want to remember', 
+        'Start organizing you life with ease today'
+    ];
 
     const slideShow = () => {
         <Slide autoplay={false}>
@@ -99,6 +111,12 @@ const Dashboard = ({ user, isLoggedIn, onLogout , authToken}) => {
             {isLoggedIn ? (
                 user && 
                     <>
+                        <div className='dashboard__header'>
+                            <Link to='/' >
+                                <img src={logoImage} alt='brand logo' className='dashboard__logo'/>
+                            </Link>
+                            <h2 className='dashboard__title'>Nota Bene</h2>
+                        </div>
                         <PageHeader 
                             user={user} 
                             onShow={handleShowNav} 
@@ -111,9 +129,29 @@ const Dashboard = ({ user, isLoggedIn, onLogout , authToken}) => {
                         <main className='dashboard'>
                             <div className='dashboard__hero'>
                                 <img src={slideLeft} alt='hero slider' className='dashboard__hero-slider dashboard__hero-slider--left' onClick={handleSlideDown}/>
-                                <img src={slideURL[slideNum]} alt='hero sketch' className='dashboard__hero-image'/>
+                                <div className='hero__welcome'>
+                                    <img src={slideURL[slideNum]} alt='hero sketch' className='dashboard__hero-image'/>
+                                    <p className='dashboard__features'>
+                                        {slideCaption[slideNum]}
+                                    </p>
+                                </div>
                                 <img src={slideRight} alt='hero slider' className='dashboard__hero-slider dashboard__hero-slider--right' onClick={handleSlideUp}/>
                             </div>
+                            {/* <div className='dashboard__hero'>
+                                <Slide autoplay={false}>
+                                    {
+                                        slideImages.map((slideImage, index) => {
+                                            <div className='dashboard__hero-slide' key={index}>
+                                                <div className='dashboard__hero-background'>
+                                                    <img src={slideImage.url} alt='slide image' />
+                                                    <span>{slideImage.caption}</span>
+                                                </div>
+                                            </div>
+                                        })
+                                    }
+                                </Slide>
+                            </div> */}
+
                             <div className='dashboard__actions'>
                                 <div className='dashboard__history'>
                                     <p className='dashboard__history-text'>

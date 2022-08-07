@@ -1,0 +1,6 @@
+@use './colors';
+
+$underline: 3.5px solid colors.$primary-color;
+$scale: scale(1.2);
+$scale-small: scale(1.1);
+$scale-smaller: scale(1.025);

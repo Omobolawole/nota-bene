@@ -57,7 +57,7 @@ const LoginPage = () => {
                 <img src={googleImage} alt='google logo' className='login__auth-logo'/>
                 Log In with Google
             </a>
-            <p className='login__or'>or</p>
+            <p className='login__or'>-----------------------or-----------------------</p>
             <form className='login__form' onSubmit={handleSubmit}>
                 <label className='login__label'>
                     <input 

@@ -30,8 +30,10 @@ const List = ({ list, onDelete }) => {
 
     return (
         <article className='list'>
-            <h3 className='list__label'>{list.label}</h3>
-            <p className='list__date'>{date}</p>
+            <div className='list__heading'>
+                <h3 className='list__label'>{list.label}</h3>
+                <p className='list__date'>{date}</p>
+            </div>
             <ul className='list__content'>
                 {
                     <li className='list__group' key={list.id} >
