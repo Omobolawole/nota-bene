@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useHistory, Link } from 'react-router-dom';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import axios from 'axios';
 import backIcon from '../../assets/icons/arrow_back.svg';
 import List from '../../components/List/List';
@@ -12,6 +14,21 @@ const ListsPage = ({ user }) => {
     const [isError, setIsError] = useState(false);
 
     const history = useHistory();
+
+    const moveListItem = useCallback(
+        (dragIndex, hoverIndex) => {
+            const dragItem = listsData[dragIndex]
+            const hoverItem = listsData[hoverIndex]
+  
+            setListsData(notes => {
+                const updatedNotes = [...notes]
+                updatedNotes[dragIndex] = hoverItem
+                updatedNotes[hoverIndex] = dragItem
+                return updatedNotes
+            })
+        },
+        [listsData],
+    )
 
     const handleDelete = (id) => {
         axios
@@ -55,29 +72,31 @@ const ListsPage = ({ user }) => {
     }
 
     return (
-        <main>
-            <div className='lists__nav'>
-                <img src={backIcon} alt='back icon' className='lists__back' onClick={history.goBack}/>
-                <Link to='/list/add' className='lists__link'>
-                    <div className='lists__add'>
-                        <p className='lists__add-text' >
-                            + New Item
-                        </p>
-                    </div>
-                </Link>
-            </div>
-            <div className='lists__container'>
-                {
-                    listsData.map((list) => {
-                       return <List 
-                                key={list.id}
-                                list={list}
-                                onDelete={handleDelete}
-                              />
-                    })
-                }
-            </div>
-        </main>
+        <DndProvider backend={HTML5Backend}>
+            <main className='lists'>
+                <div className='lists__nav'>
+                    <img src={backIcon} alt='back icon' className='lists__back' onClick={history.goBack}/>
+                    <Link to='/list/add' className='lists__link'>
+                        <div className='lists__add'>
+                            <p className='lists__add-text' >
+                                + New Item
+                            </p>
+                        </div>
+                    </Link>
+                </div>
+                <div className='lists__container'>
+                    {
+                        listsData.map((list) => {
+                        return <List 
+                                    key={list.id}
+                                    list={list}
+                                    onDelete={handleDelete}
+                                />
+                        })
+                    }
+                </div>
+            </main>
+        </DndProvider>
     );
 };
 

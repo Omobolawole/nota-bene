@@ -56,7 +56,7 @@ const SignupPage = () => {
                 <img src={googleImage} alt='google logo' className='signup__auth-logo'/>
                 Sign Up with Google
             </a>
-            <p className='signup__or'>-----------------------or-----------------------</p>
+            <p className='signup__or'>or</p>
             <form className='signup__form' onSubmit={handleSubmit}>
                 <label className='signup__label'>
                     <input

@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import dateFormat from "dateformat";
-import { useDrag, useDrop } from 'react-dnd'
+import { useDrag, useDrop } from 'react-dnd';
 import editIcon from '../../assets/icons/edit.svg';
 import deleteIcon from '../../assets/icons/delete.svg';
 import './Note.scss';
@@ -27,9 +27,7 @@ const Note = ({ index, note, moveListItem, onDelete }) => {
             const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
             const hoverActualY = monitor.getClientOffset().y - hoverBoundingRect.top
 
-            // if dragging down, continue only when hover is smaller than middle Y
             if (dragIndex < hoverIndex && hoverActualY < hoverMiddleY) return;
-            // if dragging up, continue only when hover is bigger than middle Y
             if (dragIndex > hoverIndex && hoverActualY > hoverMiddleY) return;
 
             moveListItem(dragIndex, hoverIndex)

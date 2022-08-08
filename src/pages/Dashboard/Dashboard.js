@@ -1,9 +1,9 @@
 import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Swiper from 'swiper/bundle';
-import 'swiper/css/bundle';
-import { Slide } from 'react-slideshow-image';
-import 'react-slideshow-image/dist/styles.css';
+// import Swiper from 'swiper/bundle';
+// import 'swiper/css/bundle';
+// import { Slide } from 'react-slideshow-image';
+// import 'react-slideshow-image/dist/styles.css';
 import LoginPage from '../LoginPage/LoginPage';
 import PageHeader from '../../components/PageHeader/PageHeader';
 import PageNav from '../../components/PageNav/PageNav';
@@ -17,7 +17,7 @@ import sketch4 from '../../assets/illustrations/sketch-4.svg';
 import sketch5 from '../../assets/illustrations/sketch-5.svg';
 import './Dashboard.scss';
 
-const Dashboard = ({ user, isLoggedIn, onLogout , authToken}) => {
+const Dashboard = ({ user, isLoggedIn, onLogout , authToken, onOpen }) => {
 
     const [showNav, setShowNav] = useState(false);
     const [showOptions, setShowOptions] = useState(false);
@@ -26,51 +26,51 @@ const Dashboard = ({ user, isLoggedIn, onLogout , authToken}) => {
 
     // const swiper = new Swiper(...);
 
-    const slideImages = [
-        {
-            url: '../../assets/illustrations/sketch-1.svg',
-            caption: 'Slide 1'
-        },
-        {
-            url: '../../assets/illustrations/sketch-2.svg',
-            caption: 'Slide 2'
-        },
-        {
-            url: '../../assets/illustrations/sketch-3.svg',
-            caption: 'Slide 3'
-        },
-        {
-            url: '../../assets/illustrations/sketch-4.svg',
-            caption: 'Slide 4'
-        },
-        {
-            url: '../../assets/illustrations/sketch-5.svg',
-            caption: 'Slide 5'
-        }
-    ];
+    // const slideImages = [
+    //     {
+    //         url: '../../assets/illustrations/sketch-1.svg',
+    //         caption: 'Slide 1'
+    //     },
+    //     {
+    //         url: '../../assets/illustrations/sketch-2.svg',
+    //         caption: 'Slide 2'
+    //     },
+    //     {
+    //         url: '../../assets/illustrations/sketch-3.svg',
+    //         caption: 'Slide 3'
+    //     },
+    //     {
+    //         url: '../../assets/illustrations/sketch-4.svg',
+    //         caption: 'Slide 4'
+    //     },
+    //     {
+    //         url: '../../assets/illustrations/sketch-5.svg',
+    //         caption: 'Slide 5'
+    //     }
+    // ];
 
     const slideURL = [sketch1, sketch2, sketch3, sketch4, sketch5];
     const slideCaption = [
-        'NOTA BENE is a simple app tailored to your needs', 
+        'NOTA BENE is a simple app tailored to your organizational needs', 
         'Note your thougths with ease', 
         'Put down your lists without the pressure of deadlines', 
         'Keep important details you want to remember', 
-        'Start organizing you life with ease today'
+        'Start organizing your life with ease today!'
     ];
 
-    const slideShow = () => {
-        <Slide autoplay={false}>
-            {
-                slideImages.map((slideImage, index) => {
-                    <div className='dashboard__hero-slide' key={index}>
-                        <div className='dashboard__hero-background'>
-                            <span>{slideImage.caption}</span>
-                        </div>
-                    </div>
-                })
-            }
-        </Slide>
-    };
+    // const slideShow = () => {
+    //     <Slide autoplay={false}>
+    //         {
+    //             slideImages.map((slideImage, index) => {
+    //                 <div className='dashboard__hero-slide' key={index}>
+    //                     <div className='dashboard__hero-background'>
+    //                         <span>{slideImage.caption}</span>
+    //                     </div>
+    //                 </div>
+    //             })
+    //         }
+    //     </Slide>
+    // };
 
     const handleSlideDown = () => {
         if(slideNum === 0) {
@@ -192,7 +192,11 @@ const Dashboard = ({ user, isLoggedIn, onLogout , authToken}) => {
                             onHide={handleHideNav} 
                             onLogout={authToken && onLogout} 
                             onAdd={handleShowOptions}
+                            onOpen={onOpen}
                         />
+                        {/* <div className='dashboard__copyright'>
+                            <p className='dashboard__copyright-text'>&copy; Nota Bene Inc. All Rights Reserved.</p>
+                        </div> */}
                     </>
             ) : (
                 <LoginPage />

@@ -1,5 +1,6 @@
 @use '../../styles/partials/colors';
 @use '../../styles/partials/mixins';
+@use '../../styles/partials/variables';
 
 .header {
 
@@ -11,17 +12,29 @@
 
     &__menu {
         width: 1.5rem;
+        transition: transform 0.3s;
 
         @include mixins.desktop {
             width: 2rem;
+        }
+
+        &:hover {
+            transform: variables.$scale;
+            cursor: pointer;
         }
     }
 
     &__search {
         width: 1.5rem;
+        transition: transform 0.3s;
 
         @include mixins.desktop {
             width: 2rem;
+        }
+
+        &:hover {
+            transform: variables.$scale;
+            cursor: pointer;
         }
     }
 

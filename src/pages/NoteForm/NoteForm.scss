@@ -70,6 +70,11 @@
     &__buttons {
         display: flex;
         flex-direction: column;
+
+        @include mixins.tablet {
+            flex-direction: row;
+            justify-content: space-between
+        }
     }
 
     &__button {
@@ -78,7 +83,7 @@
         margin-bottom: 1rem;
 
         @include mixins.tablet {
-            width: auto;
+            width: 48%;
         }
     }
 }

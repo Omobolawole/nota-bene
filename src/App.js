@@ -18,6 +18,7 @@ const App = () => {
     // const [isGoogle, setIsGoogle] = useState(false); 
     const [isAuthenticating, setIsAuthenticating] = useState(true);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
     const [user, setUser] = useState(null);
 
     const authToken = sessionStorage.getItem('authToken');
@@ -33,6 +34,14 @@ const App = () => {
         setIsLoggedIn(false);
         setUser(null);
         sessionStorage.removeItem('authToken');
+    };
+
+    const handleOpenModal = () => {
+        setModalIsOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setModalIsOpen(false);
     };
 
     useEffect(() => {
@@ -89,6 +98,7 @@ const App = () => {
                             isLoggedIn={isLoggedIn}
                             authToken={authToken}
                             onLogout={authToken && handleLogout} 
+                            onOpen={handleOpenModal}
                             {...routerProps} 
                         />
                     }
@@ -137,7 +147,13 @@ const App = () => {
                         <ListForm user={user} status='add' {...routerProps} />
                     } 
                 />
-                <Route path='/account' exact component={AccountPage} />
+                <Route 
+                    path='/account' 
+                    exact 
+                    render={(routerProps) => 
+                        <AccountPage onClose={handleCloseModal} isOpen={modalIsOpen} {...routerProps} />
+                    } 
+                />
             </Switch>
         </Router>
   );

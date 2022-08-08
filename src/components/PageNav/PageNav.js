@@ -11,7 +11,7 @@ import './PageNav.scss';
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
-const PageNav = ({ onShow, onHide, onLogout, onAdd }) => {
+const PageNav = ({ onShow, onHide, onLogout, onAdd, onOpen }) => {
     return (
         <section className={onShow ? 'links' : 'links--hidden'}>
             <nav className='links__nav'>
@@ -64,10 +64,10 @@ const PageNav = ({ onShow, onHide, onLogout, onAdd }) => {
                             activeClassName='links__item--active'
                         >
                             <img src={filesIcon} alt='files icon' className='links__icon' />
-                            <p className='links__text'>Files</p>
+                            <p className='links__text'>Details</p>
                         </NavLink>
                     </li>
-                    <li className='links__list-item'>
+                    <li className='links__list-item' onClick={onOpen} >
                         <NavLink
                             to='/account'
                             className='links__item'

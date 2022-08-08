@@ -1,0 +1,139 @@
+@use '../../styles/partials/colors';
+@use '../../styles/partials/mixins';
+@use '../../styles/partials/fonts';
+@use '../../styles/partials/variables';
+
+.account {
+
+    &__header {
+        width: 100%;
+        height: 3rem;
+        border-bottom: 4px solid colors.$primary-color;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__logo {
+        height: 2.5rem;
+        width: 2.5rem;
+        object-fit: cover;
+        transition: transform 0.3s;
+
+        &:hover {
+            transform: variables.$scale;
+            cursor: pointer;
+        }
+    }
+
+    &__title {
+        text-transform: uppercase;
+        margin-bottom: -0.015rem;
+    }
+
+    &__modal {
+        display: flex;
+        margin: auto;
+        flex-direction: column;
+        padding: 1rem 2rem;
+        // background-color: colors.$primary-white;
+        border-radius: 8px;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+        backdrop-filter: blur(5px);
+        animation: fadeInDown 0.5s ease-in-out;
+        transform: 'translate(-50%, -50%)';
+    }
+
+    &__overlay {
+        display: flex;
+        // background-color: colors.$primary-white;
+        height: 50vh;
+        width: 90%;
+        margin: auto;
+        margin-top: 5rem;
+    }
+
+    &__nav {
+        @include mixins.mobile-nav;
+    }
+
+    &__link {
+        text-decoration: none;
+    }
+
+    &__icon {
+        width: 1.5rem;
+        transition: transform 0.3s;
+
+        &:hover {
+            transform: variables.$scale;
+            cursor: pointer;
+        }
+    }
+
+    &__group {
+        display: flex;
+        align-items: center;
+    }
+
+    &__text {
+        margin-left: 0.5rem;
+    }
+
+    &__theme-switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+        margin-left: 1rem;
+    }
+
+    &__theme-checkbox {
+        opacity: 0;
+        width: 0;
+        height: 0;
+
+        &:checked {
+            background-color: colors.$primary-color;
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        &:focus {
+            box-shadow: 0 0 1px colors.$primary-color;
+        }
+    }
+    
+    &__theme-slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+        border-radius: 34px;
+        box-shadow: 0 0 1px colors.$primary-color;
+        background-color: colors.$primary-color;
+
+        &::before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: colors.$primary-white;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 50%;
+
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+    }
+}
