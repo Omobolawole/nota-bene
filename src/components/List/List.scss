@@ -3,6 +3,8 @@
 
 .list {
     @include mixins.mobile-card;
+    background-color: white;
+    opacity: 1;
 
     @include mixins.tablet {
         @include mixins.tablet-card;
@@ -22,6 +24,7 @@
 
     &__content {
         padding: 1rem 0;
+        font-family: 'Lora';
     }
 
     &__group {

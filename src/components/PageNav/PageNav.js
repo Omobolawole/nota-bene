@@ -13,8 +13,8 @@ const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 const PageNav = ({ onShow, onHide, onLogout, onAdd, onOpen }) => {
     return (
-        <section className={onShow ? 'links' : 'links--hidden'}>
-            <nav className='links__nav'>
+        <section className={'links'}>
+            <nav className={onShow ? 'links__nav' : 'links__nav links__nav--hidden'}>
                 <div className='links__actions'>
                     <img src={closeIcon} alt='close icon' className='links__close' onClick={onHide} />
                     <a href={`${SERVER_URL}/auth/logout`} onClick={onLogout} >
@@ -59,7 +59,7 @@ const PageNav = ({ onShow, onHide, onLogout, onAdd, onOpen }) => {
                     </li>
                     <li className='links__list-item'>
                         <NavLink
-                            to='/files'
+                            to='/details'
                             className='links__item'
                             activeClassName='links__item--active'
                         >

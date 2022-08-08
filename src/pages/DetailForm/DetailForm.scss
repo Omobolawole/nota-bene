@@ -1,0 +1,106 @@
+@use '../../styles/partials/colors';
+@use '../../styles/partials/mixins';
+@use '../../styles/partials/fonts';
+@use '../../styles/partials/variables';
+
+
+.detail-form {
+
+    &__nav {
+        @include mixins.mobile-nav;
+    }
+
+    &__link {
+        text-decoration: none;
+    }
+
+    &__icon {
+        width: 1.5rem;
+        transition: transform 0.3s;
+
+        &:hover {
+            transform: variables.$scale;
+            cursor: pointer;
+        }
+    }
+
+    &__fields {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__title {
+        font-size: 0.95rem;
+        font-weight: 700;
+        margin-bottom: 0.25rem;
+    }
+
+    &__label {
+        @include mixins.input;
+        margin-bottom: 1.5rem;
+        font-family: 'Lora';
+
+        @include mixins.desktop {
+            margin-bottom: 1.75rem;
+        }
+    }
+    
+    &__list {
+        margin: 0;
+        padding: 0 2rem;
+    }
+
+    // &__item {
+    //     list-style-type: square;
+    // }
+
+    // &__text {
+    //     list-style-type: square;
+    // }
+
+    &__content {
+        @include mixins.input;
+        margin-bottom: 1.5rem;
+        font-family: 'Lora';
+        // font-size: 0.95rem;
+        
+        @include mixins.desktop {
+            margin-bottom: 1.75rem;
+        }
+    }
+
+    &__error {
+        @include mixins.validation;
+        color: colors.$error;
+    }
+
+    &__success {
+        @include mixins.validation;
+        color: colors.$success;
+    }
+
+    &__request {
+        @include mixins.validation;
+    }
+
+
+    &__buttons {
+        display: flex;
+        flex-direction: column;
+
+        @include mixins.tablet {
+            flex-direction: row;
+            justify-content: space-between
+        }
+    }
+
+    &__button {
+        @include mixins.button;
+        padding: 0.5rem 0;
+        margin-bottom: 1rem;
+
+        @include mixins.tablet {
+            width: 48%;
+        }
+    }
+}

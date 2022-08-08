@@ -42,8 +42,6 @@ const Note = ({ index, note, moveListItem, onDelete }) => {
         onDelete(note.id);
     };
 
-    // const opacity = isDragging ? 0 : 1
-
     return (
         <article className={!isDragging ? 'note' : 'note note--dragging'} ref={dragDropRef} >
             <div className='note__heading'>

@@ -17,7 +17,17 @@ import sketch4 from '../../assets/illustrations/sketch-4.svg';
 import sketch5 from '../../assets/illustrations/sketch-5.svg';
 import './Dashboard.scss';
 
-const Dashboard = ({ user, isLoggedIn, onLogout , authToken, onOpen }) => {
+const Dashboard = ({ 
+        user, 
+        isLoggedIn,
+        // isGoogle, 
+        onSubmit,
+        onError, 
+        // onSuccess,
+        onAxiosError,
+        onLogout , 
+        authToken, 
+        onOpen }) => {
 
     const [showNav, setShowNav] = useState(false);
     const [showOptions, setShowOptions] = useState(false);
@@ -73,14 +83,16 @@ const Dashboard = ({ user, isLoggedIn, onLogout , authToken, onOpen }) => {
     // };
 
     const handleSlideDown = () => {
-        if(slideNum === 0) {
+        setSlideNum(slideNum--);
+        if(slideNum === -1) {
             return;
         }
         setSlideNum(slideNum--);
     };
 
     const handleSlideUp = () => {
-        if(slideNum === 4) {
+        setSlideNum(slideNum++);
+        if(slideNum === 5) {
             return;
         }
         setSlideNum(slideNum++);
@@ -199,7 +211,13 @@ const Dashboard = ({ user, isLoggedIn, onLogout , authToken, onOpen }) => {
                         </div> */}
                     </>
             ) : (
-                <LoginPage />
+                <LoginPage 
+                    onSubmit={onSubmit}
+                    onError={onError}
+                    // isGoogle={isGoogle}
+                    // onSuccess={onSuccess}
+                    onAxiosError={onAxiosError}
+                />
             )}
         </>
     );

@@ -25,6 +25,7 @@
             width: 25%;
             height: 100%;
             left: 0;
+            transition: 300ms;
             border-top-left-radius: 0;
             border-bottom-right-radius: 8px;
             background-color: colors.$secondary-grey;
@@ -33,6 +34,11 @@
         @include mixins.desktop {
             width: 17%;
             padding: 5rem 1.5rem 2.25rem 1.5rem;
+        }
+
+        &--hidden {
+            position: fixed;
+            left: -100%;
         }
     }
 
@@ -179,13 +185,5 @@
     &__add-tablet {
         width: 1.75rem;
         margin-right: 0.5rem;
-    }
-
-    &--hidden {
-        display: none;
-
-        // @include mixins.desktop {
-        //     display: flex;
-        // }
     }
 }

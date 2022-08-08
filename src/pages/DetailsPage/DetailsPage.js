@@ -17,25 +17,25 @@ const DetailsPage = ({ user }) => {
 
     const moveListItem = useCallback(
         (dragIndex, hoverIndex) => {
-            const dragItem = notesData[dragIndex]
-            const hoverItem = notesData[hoverIndex]
+            const dragItem = detailsData[dragIndex]
+            const hoverItem = detailsData[hoverIndex]
   
-            setNotesData(notes => {
-                const updatedNotes = [...notes]
-                updatedNotes[dragIndex] = hoverItem
-                updatedNotes[hoverIndex] = dragItem
-                return updatedNotes
+            setDetailsData(details => {
+                const updatedDetails = [...details]
+                updatedDetails[dragIndex] = hoverItem
+                updatedDetails[hoverIndex] = dragItem
+                return updatedDetails
             })
         },
-        [notesData],
+        [detailsData],
     )
 
     const handleDelete = (id) => {
         axios
-            .delete(`${SERVER_URL}/notes/${user.id}/note/${id}`)
+            .delete(`${SERVER_URL}/details/${user.id}/detail/${id}`)
             .then((response) => {
                 console.log(response)
-                updateNotes();
+                updateDetails();
             })
             .catch((error) => {
                 console.log(error)
@@ -43,15 +43,15 @@ const DetailsPage = ({ user }) => {
             })
     };
 
-    const updateNotes = () => {
+    const updateDetails = () => {
         if(user) {
             axios
-            .get(`${SERVER_URL}/notes/${user.id}`)
+            .get(`${SERVER_URL}/details/${user.id}`)
             .then((response) => {
                 console.log(response)
-                const notesDetails = response.data;
+                const detailsDetails = response.data;
 
-                setNotesData(notesDetails.reverse());
+                setDetailsData(detailsDetails.reverse());
             })
             .catch((error) => {
                 console.log(error)
@@ -61,10 +61,10 @@ const DetailsPage = ({ user }) => {
     };
 
     useEffect(() => {
-        updateNotes();
+        updateDetails();
     }, []);
 
-    if (!notesData) {
+    if (!detailsData) {
         return <p>Getting started...</p>
     }
 
@@ -74,24 +74,24 @@ const DetailsPage = ({ user }) => {
 
     return (
         <DndProvider backend={HTML5Backend}>
-            <main className='notes'>
-                <div className='notes__nav'>
-                    <img src={backIcon} alt='back icon' className='notes__back' onClick={history.goBack}/>
-                    <Link to='/note/add' className='notes__link'>
-                        <div className='notes__add'>
-                            <p className='notes__add-text' >
-                                + New Note
+            <main className='details'>
+                <div className='details__nav'>
+                    <img src={backIcon} alt='back icon' className='details__back' onClick={history.goBack}/>
+                    <Link to='/detail/add' className='details__link'>
+                        <div className='details__add'>
+                            <p className='details__add-text' >
+                                + New detail
                             </p>
                         </div>
                     </Link>
                 </div>
-                <div className='notes__container'>
+                <div className='details__container'>
                     {
-                        notesData.map((note, index) => {
-                        return <Note 
-                                    key={note.id}
+                        detailsData.map((detail, index) => {
+                        return <Detail 
+                                    key={detail.id}
                                     index={index}
-                                    note={note}
+                                    detail={detail}
                                     moveListItem={moveListItem}
                                     onDelete={handleDelete}
                                 />
