@@ -15,7 +15,7 @@ const PageHeader = ({ user, onShow }) => {
                 <img src={searchIcon} alt='search icon' className='header__search' />
             </nav>
             <div className='header__title'>
-                <h3 className='header__greeting'>{`Welcome back ${user.username.split(' ')[0]}!`}</h3>
+                <h3 className='header__greeting'>{`Welcome ${user.username.split(' ')[0]}!`}</h3>
                 <p className='header__date'>{date}</p>
             </div>
         </header>

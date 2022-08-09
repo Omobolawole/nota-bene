@@ -63,7 +63,7 @@ const Dashboard = ({
     ];
 
     const slideCaption = [
-        'NOTA BENE is a simple app tailored to your organizational needs', 
+        'NOTA BENE is an app tailored to your organizational needs', 
         'Note your thoughts with ease', 
         'Put down your lists without the pressure of deadlines', 
         'Keep important details you want to remember', 
