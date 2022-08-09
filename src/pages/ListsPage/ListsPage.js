@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import uniqid from 'uniqid';
 import axios from 'axios';
 import backIcon from '../../assets/icons/arrow_back.svg';
 import List from '../../components/List/List';
@@ -11,6 +12,8 @@ const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 const ListsPage = ({ user }) => {
     const [listsData, setListsData] = useState([]);
+    const [itemsStatuses, setItemsStatuses] = useState({});
+    const [itemsIds, setItemsIds] = useState({});
     const [isError, setIsError] = useState(false);
 
     const history = useHistory();
@@ -48,12 +51,51 @@ const ListsPage = ({ user }) => {
             axios
                 .get(`${SERVER_URL}/lists/${user.id}`)
                 .then((response) => {
+                    console.log(response.data)
+
                     const listsDetails = response.data;
 
-                    setListsData(listsDetails.reverse());
+                    const labels = {};
+                    const statuses = {};
+                    const Ids = {};
+                    const updatedListsDetails = [];
+
+                    listsDetails.forEach(item => {
+                        if (!labels[item.label]) {
+                            labels[item.label] = [];
+                        };
+                    });
+
+                    listsDetails.forEach(item => {
+                        if (Object.keys(labels).includes(item.label)) {
+                            labels[item.label].push(item.item);
+                        };
+                    });
+
+                    listsDetails.forEach(item => {
+                        statuses[item.item] = item.status;
+                    });
+
+                    listsDetails.forEach(item => {
+                        Ids[item.item] = item.id;
+                    });
+
+                    Object.keys(labels).forEach((key) => {
+                        const newItem = {
+                            id: uniqid(),
+                            items: labels[key],
+                            label: key,
+                            updated_at: new Date(),
+                            user_id: user.id
+                        };
+                        updatedListsDetails.push(newItem);
+                    });
+
+                    setListsData(updatedListsDetails);
+                    setItemsStatuses(statuses);
+                    setItemsIds(Ids);
                 })
-                .catch((error) => {
-                    console.log(error)
+                .catch(() => {
                     setIsError(true);
                 });
         }
@@ -86,11 +128,15 @@ const ListsPage = ({ user }) => {
                 </div>
                 <div className='lists__container'>
                     {
-                        listsData.map((list) => {
+                        listsData.map((list, index) => {
                         return <List 
                                     key={list.id}
+                                    index={index}
+                                    user={user}
                                     list={list}
                                     onDelete={handleDelete}
+                                    itemsStatuses={itemsStatuses}
+                                    itemsIds={itemsIds}
                                 />
                         })
                     }

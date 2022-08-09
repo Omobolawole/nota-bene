@@ -10,11 +10,6 @@ import PageNav from '../../components/PageNav/PageNav';
 import logoImage from '../../assets/logos/nb-logo-gradient.svg';
 import slideRight from '../../assets/icons/slide_right.svg';
 import slideLeft from '../../assets/icons/slide_left.svg';
-import sketch1 from '../../assets/illustrations/sketch-1.svg';
-import sketch2 from '../../assets/illustrations/sketch-2.svg';
-import sketch3 from '../../assets/illustrations/sketch-3.svg';
-import sketch4 from '../../assets/illustrations/sketch-4.svg';
-import sketch5 from '../../assets/illustrations/sketch-5.svg';
 import './Dashboard.scss';
 
 const Dashboard = ({ 
@@ -59,13 +54,20 @@ const Dashboard = ({
     //     }
     // ];
 
-    const slideURL = [sketch1, sketch2, sketch3, sketch4, sketch5];
+    const slideURL = [
+        'http://localhost:8080/illustrations/sketch-1.svg', 
+        'http://localhost:8080/illustrations/sketch-2.svg', 
+        'http://localhost:8080/illustrations/sketch-3.svg', 
+        'http://localhost:8080/illustrations/sketch-4.svg', 
+        'http://localhost:8080/illustrations/sketch-5.svg'
+    ];
+
     const slideCaption = [
         'NOTA BENE is a simple app tailored to your organizational needs', 
-        'Note your thougths with ease', 
+        'Note your thoughts with ease', 
         'Put down your lists without the pressure of deadlines', 
         'Keep important details you want to remember', 
-        'Start organizing your life with ease today!'
+        'Start organizing your life today!'
     ];
 
     // const slideShow = () => {
@@ -192,7 +194,7 @@ const Dashboard = ({
                                             New List
                                     </button>
                                 </Link>
-                                <Link to='/file/add' className='dashboard__text'>
+                                <Link to='/detail/add' className='dashboard__text'>
                                     <button className='dashboard__button'>
                                             New Detail
                                     </button>

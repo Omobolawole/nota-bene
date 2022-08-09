@@ -12,6 +12,7 @@ const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 const NotesPage = ({ user }) => {
     const [notesData, setNotesData] = useState([]);
     const [isError, setIsError] = useState(false);
+    const [isDelete, setIsDelete] = useState(false);
 
     const history = useHistory();
 
@@ -35,6 +36,9 @@ const NotesPage = ({ user }) => {
             .delete(`${SERVER_URL}/notes/${user.id}/note/${id}`)
             .then((response) => {
                 console.log(response)
+                
+                // setIsDelete(true);
+                // alert('Your note has been deleted.');
                 updateNotes();
             })
             .catch((error) => {
@@ -51,6 +55,7 @@ const NotesPage = ({ user }) => {
                 console.log(response)
                 const notesDetails = response.data;
 
+                // setIsDelete(false);
                 setNotesData(notesDetails.reverse());
             })
             .catch((error) => {
@@ -94,6 +99,7 @@ const NotesPage = ({ user }) => {
                                     note={note}
                                     moveListItem={moveListItem}
                                     onDelete={handleDelete}
+                                    // isDelete={isDelete}
                                 />
                         })
                     }

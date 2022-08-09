@@ -97,33 +97,26 @@ const App = () => {
                 .then((response) => {
                     setUser(response.data);
                     setIsAuthenticating(false);
+                    handleLogin();
                 })
                 .catch((error) => {
                     console.log(`Error Authenticating: ${error}`);
                 });
-        };
-    }, [authToken])
-
-    useEffect(() => {
-        // if (isGoogle) {
+        } else {
             axios
-            .get(`${SERVER_URL}/auth/profile`, { withCredentials: true })
-            .then((response) => {
-                setUser(response.data);
-                setIsAuthenticating(false);
-                handleLogin();
-            })
-            .catch((error) => {
-                console.log(`Error Authenticating: ${error}`);
-                setIsAuthenticating(false);
-                setIsLoggedIn(false);
-            });
-        // }
-    }, []);
-
-    // if (isAuthenticating && !isLoggedIn) {
-    //     return <p>Please wait ...</p>
-    // }
+                .get(`${SERVER_URL}/auth/profile`, { withCredentials: true })
+                .then((response) => {
+                    setUser(response.data);
+                    setIsAuthenticating(false);
+                    handleLogin();
+                })
+                .catch((error) => {
+                    // console.log(`Error Authenticating: ${error}`);
+                    setIsAuthenticating(false);
+                    setIsLoggedIn(false);
+                });
+        }
+    }, [authToken])
 
     return (
         <Router>
@@ -146,74 +139,64 @@ const App = () => {
                         />
                     }
                 />
-                <Route exact path='/signup' component={SignupPage} />
-                <Route exact path='/login' component={LoginPage} />
+                <Route path='/signup' component={SignupPage} />
+                <Route path='/login' component={LoginPage} />
                 <Route 
                     path='/notes' 
-                    exact 
                     render={(routerProps) => 
                         <NotesPage user={user} {...routerProps} />
                     } 
                 />
                 <Route 
                     path='/note/:noteId/edit'
-                    exact
                     render={(routerProps) => 
                         <NoteForm user={user} status='edit' {...routerProps}/>
                     } 
                 />
                 <Route 
                     path='/note/add' 
-                    exact
                     render={(routerProps) => 
                         <NoteForm user={user} status='add' {...routerProps} />
                     } 
                 />
                 <Route 
                     path='/lists' 
-                    exact 
                     render={(routerProps) => 
                         <ListsPage user={user} {...routerProps} />
                     }
                 />
                 <Route 
                     path='/list/:listId/edit'
-                    exact
                     render={(routerProps) => 
                         <ListForm user={user} status='edit' {...routerProps}/>
                     } 
                 />
                 <Route 
                     path='/list/add' 
-                    exact
                     render={(routerProps) => 
                         <ListForm user={user} status='add' {...routerProps} />
                     } 
                 />
                 <Route 
                     path='/details' 
-                    exact 
                     render={(routerProps) => 
                         <DetailsPage user={user} {...routerProps} />
                     }
                 />
                 <Route 
                     path='/detail/:detailId/edit'
-                    exact
                     render={(routerProps) => 
                         <DetailForm user={user} status='edit' {...routerProps}/>
                     } 
                 />
                 <Route 
                     path='/detail/add'
-                    exact
                     render={(routerProps) => 
                         <DetailForm user={user} status='add' {...routerProps}/>
                     } 
                 />
                 <Route 
                     path='/account' 
-                    exact 
                     render={(routerProps) => 
                         <AccountPage onClose={handleCloseModal} isOpen={modalIsOpen} {...routerProps} />
                     } 

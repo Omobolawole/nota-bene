@@ -1,8 +1,9 @@
 import { useHistory, Link } from 'react-router-dom';
-import ReactModal from "react-modal";
+// import ReactModal from "react-modal";
 // ReactModal.setAppElement('.account__modal');
 import logoImage from '../../assets/logos/nb-logo-gradient.svg';
-import closeIcon from '../../assets/icons/close.svg';
+import backIcon from '../../assets/icons/arrow_back.svg';
+import homeIcon from '../../assets/icons/home.svg';
 import lightIcon from '../../assets/icons/light_mode.svg';
 import displayIcon from '../../assets/icons/display_settings.svg';
 import shareIcon from '../../assets/icons/share.svg';
@@ -19,16 +20,17 @@ const AccountPage = ({ isOpen, onClose }) => {
 
     return (
         <main className='account__container'>
-            <div className='account__header'>
+            {/* <div className='account__header'>
                 <Link to='/' >
                     <img src={logoImage} alt='brand logo' className='account__logo'/>
                 </Link>
                 <h2 className='account__title'>Nota Bene</h2>
-            </div>
-            <ReactModal className='account__modal' overlayClassName="account__overlay" isOpen={isOpen} >
-                <div className='account__nav'> 
+            </div> */}
+            {/* <ReactModal className='account__modal' overlayClassName="account__overlay" isOpen={isOpen} > */}
+                <div className='account__nav'>
+                    <img src={backIcon} alt='back icon' className='account__icon' onClick={history.goBack} />
                     <Link to='/' className='account__link'>
-                        <img src={closeIcon} alt='close icon' className='account__icon' onClick={onClose} />
+                        <img src={homeIcon} alt='home icon' className='account__icon' />
                     </Link>
                 </div>
                 <section>
@@ -61,7 +63,7 @@ const AccountPage = ({ isOpen, onClose }) => {
                         <p className='account__text'>Send app feedback</p>
                     </div>
                 </section>
-            </ReactModal>
+            {/* </ReactModal> */}
         </main>
     );
 };

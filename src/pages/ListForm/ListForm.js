@@ -98,22 +98,22 @@ const ListForm = ({ user, status }) => {
         };
     };
 
-    useEffect(() => {
-        if (status === 'edit' && user ) {
-            axios
-                .get(`${SERVER_URL}/lists/${user.id}/list/${listId}`)
-                .then((response) => {
-                    const selectedList = response.data;
+    // useEffect(() => {
+    //     if (status === 'edit' && user ) {
+    //         axios
+    //             .get(`${SERVER_URL}/lists/${user.id}/list/${listId}`)
+    //             .then((response) => {
+    //                 const selectedList = response.data;
   
-                    setListLabel(selectedList.label);
-                    setListContent(selectedList.item);
-                })
-                .catch((error) => {
-                    console.log(error)
-                    setIsAxiosError(true);
-                });
-        }
-    }, [listId]);
+    //                 setListLabel(selectedList.label);
+    //                 setListContent(selectedList.item);
+    //             })
+    //             .catch((error) => {
+    //                 console.log(error)
+    //                 setIsAxiosError(true);
+    //             });
+    //     }
+    // }, [listId]);
 
     return (
         <>

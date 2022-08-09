@@ -84,7 +84,7 @@ const SignupPage = () => {
                 </label>
                 <label className='signup__label'>
                     <input 
-                        type='text'
+                        type='password'
                         placeholder='Password'
                         className={!isError ? 'signup__input' : 'signup__input signup__input--error'}
                         name='password'
@@ -93,7 +93,7 @@ const SignupPage = () => {
 
                 {isError && <span className='signup__error'>All fields are required to sign up.</span>}
                 {isSuccess && <span className='signup__success'>Sign up successful! Log in below.</span>}
-                {isAxiosError && <span className='signup__request'>Please try again later.</span>}
+                {isAxiosError && <span className='signup__request'>Error signing in. Please try again later.</span>}
 
                 <button className='signup__button'>Continue</button>
             </form>

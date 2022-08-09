@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import uniqid from 'uniqid';
 import dateFormat from "dateformat";
 import { useDrag, useDrop } from 'react-dnd';
+import axios from 'axios';
 // import uncheckedIcon from '../../assets/icons/check_box_empty.svg';
 // import checkedIcon from '../../assets/icons/check_box_filled.svg';
 import editIcon from '../../assets/icons/edit.svg';
@@ -9,9 +11,9 @@ import deleteIcon from '../../assets/icons/delete.svg';
 // import { formatDate } from '../../utils/dateUtils';
 import './List.scss';
 
-const List = ({ index, list, moveListItem, onDelete }) => {
-    // const [itemsData, setItemsData] = useState([]);
-    // const [isChecked, setIsChecked] = useState(false)
+const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+
+const List = ({ index, user, list, moveListItem, onDelete, itemsStatuses, itemsIds }) => {
 
     const date = dateFormat(list.updated_at, "mmmm dS, yyyy");
 
@@ -43,19 +45,42 @@ const List = ({ index, list, moveListItem, onDelete }) => {
     const ref = useRef(null);
     const dragDropRef = dragRef(dropRef(ref));
 
-    // const handelCheck = () => {
-    //     setIsChecked(true);
-    // };
-    
-    // const handelUncheck = () => {
-    //     setIsChecked(false);
-    // };
+    const updateStatus = (item) => {
+        if (user && item) {
+            axios
+                .put(`${SERVER_URL}/lists${user.id}/list/${itemsIds[item]}`, {
+                    label: list.label,
+                    item: item,
+                    checked: itemsStatuses[item],
+                    user_id: user.id
+                }) 
+                .then((response) => {
+                    console.log(response)
+                    // setIsError(false);
+                    // setIsSuccess(true);
+                })
+                .catch((response) => {
+                    console.log(response)
+                    // setIsAxiosError(true);
+                });
+        }
+    };
+
+    const handleItemToggle = (item) => {
+        itemsStatuses[item] = !itemsStatuses[item];
+        updateStatus(item);
+    };
+
+    const handleItemsCheck = (items) => {
+        items.forEach(item => {
+            itemsStatuses[item] = true;
+            updateStatus(item);
+        });
+    };
 
     const handleClick = () => {
         onDelete(list.id);
     };
-
-    // const listArray = JSON.parse(list.list);
 
     return (
         <article className={!isDragging ? 'list' : 'list list--dragging'} ref={dragDropRef}>
@@ -65,18 +90,25 @@ const List = ({ index, list, moveListItem, onDelete }) => {
             </div>
             <ul className='list__content'>
                 {
-                    <li className='list__group' key={list.id} >
-                        {/* <img src={isChecked ? checkedIcon : uncheckedIcon} alt='checkbox icon' className='list__icon' onClick={handelCheck} /> */}
-                        <label htmlFor='list-item' className='list__item'>
-                            <input type='checkbox' className='list__input' id='list-item'/>
-                            <p className='list__text'>
-                                {list.item}
-                            </p>
-                        </label>
-                    </li>
+                    list.items.map((item) => {
+                        return (
+                            <li 
+                                key={uniqid()} 
+                                className='list__group'
+                                onClick={() => handleItemToggle(item)}
+                            >
+                                <input type='checkbox' className='list__input' id='list-item'/>
+                                <label htmlFor='list-item' className='list__item'>
+                                    <p className={!itemsStatuses[item] ? 'list__text' : 'list__text list__text--checked'}>
+                                        {item}
+                                    </p>
+                                </label>
+                            </li>
+                        );
+                    })
                 }
             </ul>
-            {/* <button className='list__check-all' >Check All</button> */}
+            <button className='list__check-all' onClick={() => handleItemsCheck(list.items)} >Check All Boxes</button>
             <div className='list__icons'>
                 <Link to={`/list/${list.id}/edit`}>
                     <img src={editIcon} alt='edit icon' className='list__icon' />

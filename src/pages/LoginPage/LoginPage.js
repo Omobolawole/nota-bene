@@ -29,7 +29,7 @@ const LoginPage = ({ onSubmit, onError, onAxiosError, isGoogle }) => {
                 </label>
                 <label className='login__label'>
                     <input 
-                        type='text'
+                        type='password'
                         placeholder='Password'
                         className={!onError ? 'login__input' : 'login__input login__input--error'}
                         name='password'
