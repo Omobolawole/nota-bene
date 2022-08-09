@@ -43,24 +43,24 @@ The app is fully responsive and works well on mobile, tablet and desktop devices
 
 
 ## Install
-Clone these repos
-$ git clone https://github.com/anastasiaandu/nota-bene
-$ git clone https://github.com/anastasiaandu/nota-bene-api
+Clone these repos  
+$ git clone https://github.com/anastasiaandu/nota-bene  
+$ git clone https://github.com/anastasiaandu/nota-bene-api  
 
-Go into the repos on your device 
-$ cd nota-bene
+Go into the repos on your device  
+$ cd nota-bene  
 $ cd nota-bene-api
 
-Install dependencies
+Install dependencies  
 $ npm install
 
-Run the front-end
+Run the front-end  
 $ npm start
 
-Run the backend-end
-$ npm run dev
+Run the backend-end  
+$ npm run dev  
 
-This runs the app in the development mode. 
+This runs the app in the development mode.  
 Open http://localhost:3030 on your device to view the application in the browser.
 
 
@@ -69,5 +69,5 @@ Anastasia Andu - https://github.com/anastasiaandu
 
 
 ## Acknowledgements
-To the entire BrainStation Community, Educators, Teaching Assistants and Staff -
+To the entire BrainStation Community, Educators, Teaching Assistants and Staff -  
 I am grateful for the time and support you have given me in my time at the boot camp.
