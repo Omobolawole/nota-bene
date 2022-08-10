@@ -48,13 +48,12 @@ const ListForm = ({ user, status }) => {
 
         if (status === 'edit') {
             axios
-                .put(`${SERVER_URL}/lists${user.id}/list/${listId}`, {
+                .put(`${SERVER_URL}/lists/${user.id}/list/${listId}`, {
                     label: listLabel,
                     item: listContent,
                     user_id: user.id
                 }) 
-                .then((response) => {
-                    console.log(response)
+                .then(() => {
                     setIsError(false);
                     setIsSuccess(true);
 
@@ -78,8 +77,7 @@ const ListForm = ({ user, status }) => {
                     item: listContent,
                     user_id: user.id
                 }) 
-                .then((response) => {
-                    console.log(response)
+                .then(() => {
                     setIsError(false);
                     setIsSuccess(true);
 
@@ -91,29 +89,27 @@ const ListForm = ({ user, status }) => {
                     setIsAxiosError(true);
                 });
 
-            console.log(listContent)
-
             setListLabel('');
             setListContent('');
         };
     };
 
-    // useEffect(() => {
-    //     if (status === 'edit' && user ) {
-    //         axios
-    //             .get(`${SERVER_URL}/lists/${user.id}/list/${listId}`)
-    //             .then((response) => {
-    //                 const selectedList = response.data;
-  
-    //                 setListLabel(selectedList.label);
-    //                 setListContent(selectedList.item);
-    //             })
-    //             .catch((error) => {
-    //                 console.log(error)
-    //                 setIsAxiosError(true);
-    //             });
-    //     }
-    // }, [listId]);
+    useEffect(() => {
+        if (status === 'edit' && user ) {
+            axios
+                .get(`${SERVER_URL}/lists/${user.id}/list/${listId}`)
+                .then((response) => {
+                    const selectedList = response.data;
+
+                    setListLabel(selectedList.label);
+                    setListContent(selectedList.item);
+                })
+                .catch((error) => {
+                    console.log(error)
+                    setIsAxiosError(true);
+                });
+        }
+    }, [listId]);
 
     return (
         <>

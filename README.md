@@ -69,5 +69,5 @@ Anastasia Andu - https://github.com/anastasiaandu
 
 
 ## Acknowledgements
-To the entire BrainStation Community, Educators, Teaching Assistants and Staff -  
+To the entire BrainStation Community, Educators, Teaching Assistants and Staff -
 I am grateful for the time and support you have given me in my time at the boot camp.

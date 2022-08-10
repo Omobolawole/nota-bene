@@ -1,9 +1,5 @@
 import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-// import Swiper from 'swiper/bundle';
-// import 'swiper/css/bundle';
-// import { Slide } from 'react-slideshow-image';
-// import 'react-slideshow-image/dist/styles.css';
 import LoginPage from '../LoginPage/LoginPage';
 import PageHeader from '../../components/PageHeader/PageHeader';
 import PageNav from '../../components/PageNav/PageNav';
@@ -14,11 +10,9 @@ import './Dashboard.scss';
 
 const Dashboard = ({ 
         user, 
-        isLoggedIn,
-        // isGoogle, 
+        isLoggedIn, 
         onSubmit,
         onError, 
-        // onSuccess,
         onAxiosError,
         onLogout , 
         authToken, 
@@ -28,31 +22,6 @@ const Dashboard = ({
     const [showOptions, setShowOptions] = useState(false);
     const ref = useRef(null);
     let [slideNum, setSlideNum] = useState(0);
-
-    // const swiper = new Swiper(...);
-
-    // const slideImages = [
-    //     {
-    //         url: '../../assets/illustrations/sketch-1.svg',
-    //         caption: 'Slide 1'
-    //     },
-    //     {
-    //         url: '../../assets/illustrations/sketch-2.svg',
-    //         caption: 'Slide 2'
-    //     },
-    //     {
-    //         url: '../../assets/illustrations/sketch-3.svg',
-    //         caption: 'Slide 3'
-    //     },
-    //     {
-    //         url: '../../assets/illustrations/sketch-4.svg',
-    //         caption: 'Slide 4'
-    //     },
-    //     {
-    //         url: '../../assets/illustrations/sketch-5.svg',
-    //         caption: 'Slide 5'
-    //     }
-    // ];
 
     const slideURL = [
         'http://localhost:8080/illustrations/sketch-1.svg', 
@@ -69,20 +38,6 @@ const Dashboard = ({
         'Keep important details you want to remember', 
         'Start organizing your life today!'
     ];
-
-    // const slideShow = () => {
-    //     <Slide autoplay={false}>
-    //         {
-    //             slideImages.map((slideImage, index) => {
-    //                 <div className='dashboard__hero-slide' key={index}>
-    //                     <div className='dashboard__hero-background'>
-    //                         <span>{slideImage.caption}</span>
-    //                     </div>
-    //                 </div>
-    //             })
-    //         }
-    //     </Slide>
-    // };
 
     const handleSlideDown = () => {
         setSlideNum(slideNum--);
@@ -116,10 +71,6 @@ const Dashboard = ({
         setShowNav(false);
     };
 
-    // const handleHideOptions = () => {
-    //     setShowOptions(false);
-    // };
-
     return (
         <>
             {isLoggedIn ? (
@@ -151,21 +102,6 @@ const Dashboard = ({
                                 </div>
                                 <img src={slideRight} alt='hero slider' className='dashboard__hero-slider dashboard__hero-slider--right' onClick={handleSlideUp}/>
                             </div>
-                            {/* <div className='dashboard__hero'>
-                                <Slide autoplay={false}>
-                                    {
-                                        slideImages.map((slideImage, index) => {
-                                            <div className='dashboard__hero-slide' key={index}>
-                                                <div className='dashboard__hero-background'>
-                                                    <img src={slideImage.url} alt='slide image' />
-                                                    <span>{slideImage.caption}</span>
-                                                </div>
-                                            </div>
-                                        })
-                                    }
-                                </Slide>
-                            </div> */}
-
                             <div className='dashboard__actions'>
                                 <div className='dashboard__history'>
                                     <p className='dashboard__history-text'>
@@ -208,16 +144,11 @@ const Dashboard = ({
                             onAdd={handleShowOptions}
                             onOpen={onOpen}
                         />
-                        {/* <div className='dashboard__copyright'>
-                            <p className='dashboard__copyright-text'>&copy; Nota Bene Inc. All Rights Reserved.</p>
-                        </div> */}
                     </>
             ) : (
                 <LoginPage 
                     onSubmit={onSubmit}
                     onError={onError}
-                    // isGoogle={isGoogle}
-                    // onSuccess={onSuccess}
                     onAxiosError={onAxiosError}
                 />
             )}

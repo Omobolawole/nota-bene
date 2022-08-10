@@ -4,12 +4,15 @@
 
 .links {
     display: flex;
-    flex-direction: column;
     position: relative;
     transition: all 0.5s;
 
+    @include mixins.tablet {
+        flex-direction: column;
+    }
+
     &__nav {
-        width: 90%;
+        width: 92%;
         position: fixed;
         z-index: 3;
         bottom: 0;
@@ -19,6 +22,7 @@
         box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
         background-color: colors.$primary-white;
         transition: all 0.5s;
+        flex-grow: 1;
 
         @include mixins.tablet {
             padding: 5rem 1.5rem 2.25rem 1.5rem;

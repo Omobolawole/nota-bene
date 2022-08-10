@@ -4,7 +4,6 @@
 @use '../../styles/partials/fonts';
 
 .dashboard {
-    // margin-bottom: -3rem;
 
     @include mixins.tablet {
         display: flex;
@@ -39,10 +38,6 @@
         margin-bottom: -0.015rem;
     }
 
-    // @include mixins.desktop {
-    //     margin-left: 5rem;
-    // }
-
     &__hero {
         width: 100%;
         height: 30vh;
@@ -50,7 +45,6 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        // background-image: url('../../assets/illustrations/sketch-2.svg');
         background-size: cover;
         position: relative;
         margin-top: 3rem;
@@ -86,22 +80,6 @@
         }
     }
 
-    // &__hero-slide {
-    //     display: flex;
-    //     align-items: center;
-    //     justify-content: center;
-    //     background-size: cover;
-    //     height: 30vh;
-    // }
-
-    // &__hero-background-one {
-    //     background-image: url('../../assets/illustrations/sketch-1.svg');
-    // }
-
-    // &__hero-text {
-    //     color: colors.$primary-white;
-    // }
-
     &__hero-image {
         width: 100%;
         max-height: 12rem;
@@ -116,17 +94,8 @@
     }
 
     &__hero-slider {
-        // position: absolute;
         width: 2rem;
         transition: transform 0.3s;
-
-        // &--left {
-        //     left: 0;
-        // }
-
-        // &--right {
-        //     right: 0;
-        // }
 
         &:hover {
             transform: variables.$scale;
@@ -134,25 +103,15 @@
         }
     }
 
-    // &__stickies {
-    //     display: flex;
-    //     justify-content: center;
-    //     align-items: center;
-    //     width: 100%;
-    // }
-
     &__actions {
         display: flex;
         flex-direction: column;
         width: 100%;
         font-size: 1rem;
-        // margin-top: 2rem;
 
         @include mixins.tablet {
-            // display: none;
-            // flex-direction: row;
-            // align-items: center;
             width: 80%;
+            margin-top: -3rem;
         }
 
         @include mixins.desktop {
@@ -171,15 +130,11 @@
         border: 1px solid colors.$primary-grey;
         border-radius: 4px;
 
-        // @include mixins.tablet {
-        //     width: 10rem;
-        //     height: 5rem;
-        // }
+        &:hover {
+            background-color: colors.$secondary-grey;
+            cursor: pointer;
+        }
     }
-
-    // &__history-text {
-    //     font-size: 0.75rem;
-    // }
 
     &__customize {
         display: flex;
@@ -193,11 +148,12 @@
         @include mixins.tablet {
             margin-bottom: 2rem;
         }
-    }
 
-    // &__customize-text {
-    //     font-size: 0.75rem;
-    // }
+        &:hover {
+            background-color: colors.$secondary-grey;
+            cursor: pointer;
+        }
+    }
 
     &__add {
         &--mobile {
@@ -286,15 +242,4 @@
     &__text {
         text-decoration: none;
     }
-
-    // &__copyright {
-    //     display: flex;
-    //     justify-content: center;
-    //     align-items: center;
-    // }
-
-    // &__copyright-text {
-    //     margin-top: 3rem;
-    //     font-size: 0.65rem;
-    // }
 }

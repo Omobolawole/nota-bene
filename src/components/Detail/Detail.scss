@@ -9,16 +9,10 @@
 
     @include mixins.tablet {
         @include mixins.tablet-card;
+        width: 14rem;
     }
 
-    // &__heading {
-    //     display: flex;
-    //     justify-content: space-between;
-    //     align-items: center;
-    // }
-
     &__label {
-        // text-transform: uppercase;
         font-size: 0.85rem;
         font-weight: 700;
         padding-bottom: 0.25rem;
@@ -30,10 +24,7 @@
     }
 
     &__content {
-        // border-top: 4px solid colors.$primary-color;
-        // border-bottom: 2px solid colors.$primary-color;
         padding: 1rem 0;
-        // font-family: 'Lora';
     }
 
     &__icons {

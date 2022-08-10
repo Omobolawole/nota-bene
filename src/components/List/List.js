@@ -1,19 +1,16 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import uniqid from 'uniqid';
 import dateFormat from "dateformat";
 import { useDrag, useDrop } from 'react-dnd';
 import axios from 'axios';
-// import uncheckedIcon from '../../assets/icons/check_box_empty.svg';
-// import checkedIcon from '../../assets/icons/check_box_filled.svg';
 import editIcon from '../../assets/icons/edit.svg';
 import deleteIcon from '../../assets/icons/delete.svg';
-// import { formatDate } from '../../utils/dateUtils';
 import './List.scss';
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
-const List = ({ index, user, list, moveListItem, onDelete, itemsStatuses, itemsIds }) => {
+const List = ({ index, user, list, moveListItem, onDelete, updateLists, itemsStatuses, itemsIds }) => {
 
     const date = dateFormat(list.updated_at, "mmmm dS, yyyy");
 
@@ -48,26 +45,21 @@ const List = ({ index, user, list, moveListItem, onDelete, itemsStatuses, itemsI
     const updateStatus = (item) => {
         if (user && item) {
             axios
-                .put(`${SERVER_URL}/lists${user.id}/list/${itemsIds[item]}`, {
+                .put(`${SERVER_URL}/lists/${user.id}/list/${itemsIds[item]}`, {
                     label: list.label,
                     item: item,
                     checked: itemsStatuses[item],
                     user_id: user.id
                 }) 
                 .then((response) => {
-                    console.log(response)
-                    // setIsError(false);
-                    // setIsSuccess(true);
+                    const statusUpdate = response.data;
                 })
-                .catch((response) => {
-                    console.log(response)
-                    // setIsAxiosError(true);
-                });
         }
     };
 
     const handleItemToggle = (item) => {
         itemsStatuses[item] = !itemsStatuses[item];
+
         updateStatus(item);
     };
 
@@ -95,11 +87,15 @@ const List = ({ index, user, list, moveListItem, onDelete, itemsStatuses, itemsI
                             <li 
                                 key={uniqid()} 
                                 className='list__group'
-                                onClick={() => handleItemToggle(item)}
                             >
-                                <input type='checkbox' className='list__input' id='list-item'/>
+                                <input 
+                                    type='checkbox' 
+                                    className='list__input' 
+                                    id='list-item' 
+                                    onClick={() => handleItemToggle(item)} 
+                                />
                                 <label htmlFor='list-item' className='list__item'>
-                                    <p className={!itemsStatuses[item] ? 'list__text' : 'list__text list__text--checked'}>
+                                    <p className={itemsStatuses[item] ?  'list__text list__text--checked' : 'list__text'}>
                                         {item}
                                     </p>
                                 </label>

@@ -7,6 +7,7 @@
     &__nav {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         padding: 1rem 0;
     }
 
@@ -21,6 +22,31 @@
         &:hover {
             transform: variables.$scale;
             cursor: pointer;
+        }
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        margin-top: 1rem;
+
+        @include mixins.tablet {
+            flex-direction: row;
+        }
+    }
+
+    &__search-input {
+        @include mixins.search-input;
+        background-image: url('../../assets/icons/search.svg');
+
+        @include mixins.tablet {
+            height: 2.375rem;
+            width: 12rem;
+            font-size: 0.875rem;
+        }
+
+        @include mixins.desktop {
+            width: 17rem;
         }
     }
 

@@ -50,19 +50,10 @@
         padding: 0 2rem;
     }
 
-    // &__item {
-    //     list-style-type: square;
-    // }
-
-    // &__text {
-    //     list-style-type: square;
-    // }
-
     &__content {
         @include mixins.input;
         margin-bottom: 1.5rem;
         font-family: 'Lora';
-        // font-size: 0.95rem;
         
         @include mixins.desktop {
             margin-bottom: 1.75rem;

@@ -49,7 +49,6 @@ const Note = ({ index, note, moveListItem, onDelete }) => {
                 <p className='note__date'>{date}</p>
             </div>
             <p className='note__content'>{note.note}</p>
-            {/* {isDelete && <span className='note__delete'>Note deleted successfully.</span>} */}
             <div className='note__icons'>
                 <Link to={`/note/${note.id}/edit`}>
                     <img src={editIcon} alt='edit icon' className='note__icon' />

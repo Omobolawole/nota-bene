@@ -35,7 +35,6 @@
         align-items: center;
         font-size: 1rem;
         padding: 0.5rem;
-        // width: 2.5rem;
         color: colors.$primary-white;
         background-color: colors.$primary-color;
         margin: 0;
@@ -46,11 +45,4 @@
             cursor: pointer;
         }
     }
-
-    // &__container {
-    //     @include mixins.tablet {
-    //         display: flex;
-    //         flex-wrap: wrap;
-    //     }
-    // }
 }

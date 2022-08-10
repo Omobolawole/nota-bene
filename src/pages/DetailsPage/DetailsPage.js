@@ -33,8 +33,7 @@ const DetailsPage = ({ user }) => {
     const handleDelete = (id) => {
         axios
             .delete(`${SERVER_URL}/details/${user.id}/detail/${id}`)
-            .then((response) => {
-                console.log(response)
+            .then(() => {
                 updateDetails();
             })
             .catch((error) => {
@@ -48,7 +47,6 @@ const DetailsPage = ({ user }) => {
             axios
             .get(`${SERVER_URL}/details/${user.id}`)
             .then((response) => {
-                console.log(response)
                 const detailsDetails = response.data;
 
                 setDetailsData(detailsDetails.reverse());
@@ -80,7 +78,7 @@ const DetailsPage = ({ user }) => {
                     <Link to='/detail/add' className='details__link'>
                         <div className='details__add'>
                             <p className='details__add-text' >
-                                + New detail
+                                + New Detail
                             </p>
                         </div>
                     </Link>

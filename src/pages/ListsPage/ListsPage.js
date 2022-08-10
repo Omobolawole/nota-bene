@@ -36,8 +36,7 @@ const ListsPage = ({ user }) => {
     const handleDelete = (id) => {
         axios
             .delete(`${SERVER_URL}/lists/${user.id}/list/${id}`)
-            .then((response) => {
-                console.log(response)
+            .then(() => {
                 updateLists();
             })
             .catch((error) => {
@@ -51,8 +50,6 @@ const ListsPage = ({ user }) => {
             axios
                 .get(`${SERVER_URL}/lists/${user.id}`)
                 .then((response) => {
-                    console.log(response.data)
-
                     const listsDetails = response.data;
 
                     const labels = {};
@@ -134,7 +131,9 @@ const ListsPage = ({ user }) => {
                                     index={index}
                                     user={user}
                                     list={list}
+                                    moveListItem={moveListItem}
                                     onDelete={handleDelete}
+                                    updateLists={updateLists}
                                     itemsStatuses={itemsStatuses}
                                     itemsIds={itemsIds}
                                 />

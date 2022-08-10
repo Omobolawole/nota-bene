@@ -17,13 +17,10 @@ const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 const App = () => {
 
-    // const [isGoogle, setIsGoogle] = useState(false); 
     const [isAuthenticating, setIsAuthenticating] = useState(true);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    // const [isSuccess, setIsSuccess] = useState(false);
     const [isError, setIsError] = useState(false);
     const [isAxiosError, setIsAxiosError] = useState(false);
-    const [modalIsOpen, setModalIsOpen] = useState(false);
     const [user, setUser] = useState(null);
 
     const authToken = sessionStorage.getItem('authToken');
@@ -37,18 +34,6 @@ const App = () => {
         setIsLoggedIn(false);
         setUser(null);
         sessionStorage.removeItem('authToken');
-    };
-
-    // const handleGoogleAuth = () => {
-    //     setIsGoogle(true);
-    // };
-
-    const handleOpenModal = () => {
-        setModalIsOpen(true);
-    };
-
-    const handleCloseModal = () => {
-        setModalIsOpen(false);
     };
 
     const handleSubmit = (event) => {
@@ -72,7 +57,6 @@ const App = () => {
         axios
             .post(`${SERVER_URL}/users/login`, loginInformation) 
             .then((response) => {
-                console.log(response);
                 sessionStorage.setItem('authToken', response.data.token);
                 
                 setIsError(false);
@@ -110,13 +94,16 @@ const App = () => {
                     setIsAuthenticating(false);
                     handleLogin();
                 })
-                .catch((error) => {
-                    // console.log(`Error Authenticating: ${error}`);
+                .catch(() => {
                     setIsAuthenticating(false);
                     setIsLoggedIn(false);
                 });
         }
     }, [authToken])
+
+    if (isAuthenticating) {
+        return <p>Loading...</p>
+    }
 
     return (
         <Router>
@@ -129,12 +116,10 @@ const App = () => {
                             user={user} 
                             isLoggedIn={isLoggedIn}
                             authToken={authToken}
-                            // isGoogle={handleGoogleAuth}
                             onSubmit={handleSubmit}
                             onError={isError}
                             onAxiosError={isAxiosError}
                             onLogout={authToken && handleLogout} 
-                            onOpen={handleOpenModal}
                             {...routerProps} 
                         />
                     }
@@ -195,12 +180,7 @@ const App = () => {
                         <DetailForm user={user} status='add' {...routerProps}/>
                     } 
                 />
-                <Route 
-                    path='/account' 
-                    render={(routerProps) => 
-                        <AccountPage onClose={handleCloseModal} isOpen={modalIsOpen} {...routerProps} />
-                    } 
-                />
+                <Route path='/account' component={AccountPage} />
             </Switch>
         </Router>
   );
