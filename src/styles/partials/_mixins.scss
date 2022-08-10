@@ -76,13 +76,17 @@
 
 @mixin input {
     font-family: 'Jost';
-    border: 1px solid colors.$primary-grey;
-    border-radius: 4px;
+    // border: 1px solid colors.$primary-grey;
+    // border-radius: 4px;
     outline: none;
     padding: 0.5rem;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid colors.$primary-color;
 
     &:focus {
         border: 2px solid colors.$primary-color;
+        border-radius: 4px;
     }
 
     &::placeholder {
@@ -91,20 +95,25 @@
 
     &--error {
         border: 2px solid colors.$error;
+        border-radius: 4px;
     }
 }
 
 @mixin textarea {
     font-family: 'Jost';
-    border: 1px solid colors.$primary-grey;
-    border-radius: 4px;
+    // border: 1px solid colors.$primary-grey;
+    // border-radius: 4px;
     resize: none;
     outline: none;
     margin-bottom: 1.5rem;
     padding: 0.5rem 0.5rem 10rem 0.5rem;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid colors.$primary-color;
     
     &:focus {
         border: 2px solid colors.$primary-color;
+        border-radius: 4px;
     }
 
     &::placeholder {
@@ -113,6 +122,7 @@
 
     &--error {
         border: 2px solid colors.$error;
+        border-radius: 4px;
     }
 }
 

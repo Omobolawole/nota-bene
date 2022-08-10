@@ -12,7 +12,11 @@ const PageHeader = ({ user, onShow }) => {
 
     const handleSearchChange = (event) => {
         setNewSearch(event.target.value);
-    }
+    };
+
+    // const filteredSearch  = () => {
+
+    // }
     
     return (
         <header className='header'>

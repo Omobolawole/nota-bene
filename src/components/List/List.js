@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import uniqid from 'uniqid';
 import dateFormat from "dateformat";
@@ -10,7 +10,19 @@ import './List.scss';
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
-const List = ({ index, user, list, moveListItem, onDelete, updateLists, itemsStatuses, itemsIds }) => {
+const List = ({ 
+    index, 
+    user, 
+    list, 
+    moveListItem, 
+    onDelete, 
+    // updateLists, 
+    itemsStatuses, 
+    itemsIds 
+    }) => {
+
+    const [listItemsData, setListItemsData] = useState([]);
+    const [isError, setIsError] = useState(false);
 
     const date = dateFormat(list.updated_at, "mmmm dS, yyyy");
 
@@ -52,27 +64,45 @@ const List = ({ index, user, list, moveListItem, onDelete, updateLists, itemsSta
                     user_id: user.id
                 }) 
                 .then((response) => {
-                    const statusUpdate = response.data;
+                    console.log(response);
+                    setIsError(true);
                 })
         }
     };
 
     const handleItemToggle = (item) => {
-        itemsStatuses[item] = !itemsStatuses[item];
-
-        updateStatus(item);
+        // itemsStatuses[item] = !itemsStatuses[item];
+        // updateStatus(item);
     };
 
     const handleItemsCheck = (items) => {
-        items.forEach(item => {
-            itemsStatuses[item] = true;
-            updateStatus(item);
-        });
+        // items.forEach(item => {
+        //     itemsStatuses[item] = true;
+        //     updateStatus(item);
+        // });
     };
 
     const handleClick = () => {
         onDelete(list.id);
     };
+
+    const updateListItems = () => {
+        if(user) {
+            axios
+                .get(`${SERVER_URL}/items/${list.id}`)
+                .then((response) => {
+                    const listItemsDetails = response.data;
+                    setListItemsData(listItemsDetails);
+                })
+                .catch(() => {
+                    setIsError(true);
+                });
+        }
+    };
+
+    useEffect(() => {
+        updateListItems();
+    }, []);
 
     return (
         <article className={!isDragging ? 'list' : 'list list--dragging'} ref={dragDropRef}>
@@ -82,7 +112,7 @@ const List = ({ index, user, list, moveListItem, onDelete, updateLists, itemsSta
             </div>
             <ul className='list__content'>
                 {
-                    list.items.map((item) => {
+                    listItemsData.map((item) => {
                         return (
                             <li 
                                 key={uniqid()} 
@@ -95,8 +125,8 @@ const List = ({ index, user, list, moveListItem, onDelete, updateLists, itemsSta
                                     onClick={() => handleItemToggle(item)} 
                                 />
                                 <label htmlFor='list-item' className='list__item'>
-                                    <p className={itemsStatuses[item] ?  'list__text list__text--checked' : 'list__text'}>
-                                        {item}
+                                    <p className={!item.checked ? 'list__text' : 'list__text list__text--checked'}>
+                                        {item.item}
                                     </p>
                                 </label>
                             </li>

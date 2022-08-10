@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams, Link } from 'react-router-dom';
 import axios from 'axios';
+import uniqid from 'uniqid';
 import backIcon from '../../assets/icons/arrow_back.svg';
 import homeIcon from '../../assets/icons/home.svg';
 import './ListForm.scss';
@@ -9,7 +10,7 @@ const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 const ListForm = ({ user, status }) => {
     const [listLabel, setListLabel] = useState('');
-    const [listContent, setListContent] = useState('');
+    const [listContent, setListContent] = useState([]);
     const [isError, setIsError] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const [isAxiosError, setIsAxiosError] = useState(false);
@@ -22,7 +23,10 @@ const ListForm = ({ user, status }) => {
     };
 
     const handleChangeContent = (event) => {
-        setListContent(event.target.value);
+        const updatedListContent = listContent.map((item) => {
+            return item = event.target.value;
+        })
+        setListContent(updatedListContent);
     };
 
     const isFormValid = () => {
@@ -50,10 +54,24 @@ const ListForm = ({ user, status }) => {
             axios
                 .put(`${SERVER_URL}/lists/${user.id}/list/${listId}`, {
                     label: listLabel,
-                    item: listContent,
                     user_id: user.id
                 }) 
                 .then(() => {
+
+                    listContent.forEach((item) => {
+                        axios
+                            .put(`${SERVER_URL}/items/${listId}/item/${item.id}`, {
+                                label: listLabel,
+                                user_id: user.id,
+                                list_id: listId,
+                                item: item.item,
+                                checked: item.checked
+                            })
+                            .then((response) => {
+                                console.log(response);
+                            })
+                    })
+
                     setIsError(false);
                     setIsSuccess(true);
 
@@ -67,7 +85,7 @@ const ListForm = ({ user, status }) => {
                 });
 
             setListLabel('');
-            setListContent('');
+            setListContent([]);
         };
 
         if (status === 'add') {
@@ -100,9 +118,14 @@ const ListForm = ({ user, status }) => {
                 .get(`${SERVER_URL}/lists/${user.id}/list/${listId}`)
                 .then((response) => {
                     const selectedList = response.data;
-
                     setListLabel(selectedList.label);
-                    setListContent(selectedList.item);
+
+                    axios
+                        .get(`${SERVER_URL}/items/${listId}`)
+                        .then((response) => {
+                            const selectedItems = response.data;
+                            setListContent(selectedItems);
+                        })
                 })
                 .catch((error) => {
                     console.log(error)
@@ -125,7 +148,7 @@ const ListForm = ({ user, status }) => {
                 </label>
                 <input 
                     type='text'
-                    placeholder='Add a label to your item'
+                    placeholder='Add a label to your list'
                     className={!isError ? 'list-form__label' : 'list-form__label list-form__label--error'}
                     name='listLabel'
                     value={listLabel}
@@ -133,20 +156,29 @@ const ListForm = ({ user, status }) => {
                 />
 
                 <label className='list-form__title'>
-                    Item
+                    Items
                 </label>
-
-                <input
-                    type='text'
-                    placeholder='Add your item'
-                    className={!isError ? 'list-form__content' : 'list-form__content list-form__content--error'}
-                    name='listContent'
-                    value={listContent}
-                    onChange={handleChangeContent}
-                />
-
+                {
+                    listContent.map((item) => {
+                        return (
+                            <li 
+                                key={uniqid()} 
+                                className='list__group'
+                            >
+                                <input
+                                    type='text'
+                                    placeholder='Add your item'
+                                    className={!isError ? 'list-form__content' : 'list-form__content list-form__content--error'}
+                                    name='listContent'
+                                    value={item.item}
+                                    onChange={handleChangeContent}
+                                />
+                            </li>
+                        );
+                    })
+                }
                 {isError && <span className='list-form__error'>All fields are required.</span>}
-                {isSuccess && <span className='list-form__success'>Item {status==='add' ? 'added' : 'updated'} successfully!</span>}
+                {isSuccess && <span className='list-form__success'>List {status==='add' ? 'added' : 'updated'} successfully!</span>}
                 {isAxiosError && <span className='list-form__request'>Please try again later.</span>}
 
                 <div className='list-form__buttons'>
@@ -154,7 +186,7 @@ const ListForm = ({ user, status }) => {
                         Cancel
                     </button>
                     <button className='list-form__button' onClick={handleSubmit} >
-                        {status === 'add' ? 'Add Item' : 'Update Item'}
+                        {status === 'add' ? 'Add List' : 'Update List'}
                     </button>
                 </div>
             </form>

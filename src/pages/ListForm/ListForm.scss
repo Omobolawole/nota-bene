@@ -53,6 +53,7 @@
     &__content {
         @include mixins.input;
         margin-bottom: 1.5rem;
+        margin-top: 0.25rem;
         font-family: 'Lora';
         
         @include mixins.desktop {

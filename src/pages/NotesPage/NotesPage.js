@@ -50,8 +50,7 @@ const NotesPage = ({ user }) => {
                 const notesDetails = response.data;
                 setNotesData(notesDetails.reverse());
             })
-            .catch((error) => {
-                console.log(error)
+            .catch(() => {
                 setIsError(true);
             });
         }

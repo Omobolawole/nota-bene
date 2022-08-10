@@ -12,23 +12,21 @@ const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 const ListsPage = ({ user }) => {
     const [listsData, setListsData] = useState([]);
-    const [itemsStatuses, setItemsStatuses] = useState({});
-    const [itemsIds, setItemsIds] = useState({});
     const [isError, setIsError] = useState(false);
 
     const history = useHistory();
 
     const moveListItem = useCallback(
         (dragIndex, hoverIndex) => {
-            const dragItem = listsData[dragIndex]
-            const hoverItem = listsData[hoverIndex]
+            const dragItem = listsData[dragIndex];
+            const hoverItem = listsData[hoverIndex];
   
             setListsData(notes => {
                 const updatedNotes = [...notes]
                 updatedNotes[dragIndex] = hoverItem
                 updatedNotes[hoverIndex] = dragItem
                 return updatedNotes
-            })
+            });
         },
         [listsData],
     )
@@ -51,46 +49,7 @@ const ListsPage = ({ user }) => {
                 .get(`${SERVER_URL}/lists/${user.id}`)
                 .then((response) => {
                     const listsDetails = response.data;
-
-                    const labels = {};
-                    const statuses = {};
-                    const Ids = {};
-                    const updatedListsDetails = [];
-
-                    listsDetails.forEach(item => {
-                        if (!labels[item.label]) {
-                            labels[item.label] = [];
-                        };
-                    });
-
-                    listsDetails.forEach(item => {
-                        if (Object.keys(labels).includes(item.label)) {
-                            labels[item.label].push(item.item);
-                        };
-                    });
-
-                    listsDetails.forEach(item => {
-                        statuses[item.item] = item.status;
-                    });
-
-                    listsDetails.forEach(item => {
-                        Ids[item.item] = item.id;
-                    });
-
-                    Object.keys(labels).forEach((key) => {
-                        const newItem = {
-                            id: uniqid(),
-                            items: labels[key],
-                            label: key,
-                            updated_at: new Date(),
-                            user_id: user.id
-                        };
-                        updatedListsDetails.push(newItem);
-                    });
-
-                    setListsData(updatedListsDetails);
-                    setItemsStatuses(statuses);
-                    setItemsIds(Ids);
+                    setListsData(listsDetails.reverse());
                 })
                 .catch(() => {
                     setIsError(true);
@@ -133,9 +92,6 @@ const ListsPage = ({ user }) => {
                                     list={list}
                                     moveListItem={moveListItem}
                                     onDelete={handleDelete}
-                                    updateLists={updateLists}
-                                    itemsStatuses={itemsStatuses}
-                                    itemsIds={itemsIds}
                                 />
                         })
                     }
