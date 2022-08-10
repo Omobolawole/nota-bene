@@ -77,7 +77,7 @@ const ListsPage = ({ user }) => {
                     <Link to='/list/add' className='lists__link'>
                         <div className='lists__add'>
                             <p className='lists__add-text' >
-                                + New Item
+                                + New List
                             </p>
                         </div>
                     </Link>
