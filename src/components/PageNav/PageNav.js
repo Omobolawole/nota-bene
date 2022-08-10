@@ -13,7 +13,7 @@ const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 const PageNav = ({ onShow, onHide, onLogout, onAdd, onOpen }) => {
     return (
-        <section className={'links'}>
+        <section className='links'>
             <nav className={onShow ? 'links__nav' : 'links__nav links__nav--hidden'}>
                 <div className='links__actions'>
                     <img src={closeIcon} alt='close icon' className='links__close' onClick={onHide} />

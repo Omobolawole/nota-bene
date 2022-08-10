@@ -1,0 +1,89 @@
+@use '../../styles/partials/colors';
+@use '../../styles/partials/mixins';
+@use '../../styles/partials/variables';
+
+.modal {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 1rem;
+    background-color: colors.$primary-white;
+    background-attachment: fixed;
+
+    @include mixins.tablet {
+        padding: auto;
+        padding-top: 20%;
+        background-color: rgba(19, 24, 44, 0.7);
+    }
+
+    &__container {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background-color: colors.$primary-white;
+
+        @include mixins.tablet {
+            height: 16.5rem;
+            width: 42rem;
+            padding: 2rem 2rem 1rem 2rem;
+            border-radius: 4px;
+        }
+    }
+    
+    &__close {
+        width: 1.25rem;
+        transition: transform 0.3s;
+
+        @include mixins.tablet{
+            margin-top: -7rem;
+        }
+
+        @include mixins.desktop {
+            margin-top: -7rem;
+        }
+
+        &:hover {
+            transform: variables.$scale;
+            cursor: pointer;
+        }
+    }
+
+    &__question {
+        font-size: 1.25rem;
+    }
+
+    &__buttons {
+        display: flex;
+        flex-direction: column;
+
+        @include mixins.tablet {
+            flex-direction: row;
+            justify-content: space-between
+        }
+    }
+
+    &__button {
+        @include mixins.button;
+        padding: 0.5rem 0;
+        margin-bottom: 1rem;
+
+        @include mixins.tablet {
+            width: 48%;
+        }
+
+        &--delete {
+            background-color: colors.$error;
+        }
+    }
+}

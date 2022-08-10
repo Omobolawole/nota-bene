@@ -25,31 +25,6 @@
         }
     }
 
-    &__form {
-        display: flex;
-        flex-direction: column;
-        margin-top: 1rem;
-
-        @include mixins.tablet {
-            flex-direction: row;
-        }
-    }
-
-    &__search-input {
-        @include mixins.search-input;
-        background-image: url('../../assets/icons/search.svg');
-
-        @include mixins.tablet {
-            height: 2.375rem;
-            width: 12rem;
-            font-size: 0.875rem;
-        }
-
-        @include mixins.desktop {
-            width: 17rem;
-        }
-    }
-
     &__search {
         width: 1.5rem;
         transition: transform 0.3s;

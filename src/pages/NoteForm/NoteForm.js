@@ -97,15 +97,12 @@ const NoteForm = ({ user, status }) => {
             axios
                 .get(`${SERVER_URL}/notes/${user.id}/note/${noteId}`)
                 .then((response) => {
-                    console.log(response)
-                    console.log(user)
                     const selectedNote = response.data;
 
                     setNoteLabel(selectedNote.label);
                     setNoteContent(selectedNote.note);
                 })
                 .catch((error) => {
-                    console.log(error)
                     setIsAxiosError(true);
                 });
         }
