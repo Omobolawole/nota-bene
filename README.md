@@ -33,7 +33,7 @@ The app is fully responsive and works well on mobile, tablet and desktop devices
 
 ## Screenshots
 ### Sign Up
-![image](./screenshots/signup.JPG)
+![image](./screenshots/src/assets/logos/nb-logo-gradient.svg)
 ### Log In
 ![image](./screenshots/login.JPG)
 ### Dashboard
