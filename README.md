@@ -12,6 +12,19 @@ The app requires the user to create an account and have authentication and autho
 The app is fully responsive and works well on mobile, tablet and desktop devices.
 
 
+## Features
+- Routes and sections for Notes, Lists and Details
+- JWT Authentication
+- Third Party OAuth (Google)
+- Front-End and Back-End forms and requests validation
+- CRUD functionality (Create, Read, Update, Delete)
+- Drag and Drop
+- Data persistence
+- Images slider
+- Search functionality
+- Fully responsive on all screen sizes
+
+
 ## Tech Stack 
 ### **Front-end**
 - React 
@@ -32,8 +45,6 @@ The app is fully responsive and works well on mobile, tablet and desktop devices
 
 
 ## Screenshots
-### Sign Up
-![image](./screenshots/signup.JPG)
 ### Log In
 ![image](./screenshots/login.JPG)
 ### Dashboard
@@ -42,8 +53,19 @@ The app is fully responsive and works well on mobile, tablet and desktop devices
 ![image](./screenshots/notes.JPG)
 ### Lists
 ![image](./screenshots/lists.JPG)
-### Details
-![image](./screenshots/details.JPG)
+
+
+## Learned Lessons
+- A lot of work goes into building an app from scratch.
+- Time estimation for deliverables can sometimes be inaccurate and requires flexibility.
+- There is always something new to learn.
+
+
+## Next Steps
+- Implement rich text and emojis for input forms.
+- Fill out Account and Settings section.
+- Enable user customization on the app with pinnable content.
+- Extra security and authentication for sensitive information in Details section.
 
 
 ## Installation
@@ -61,11 +83,19 @@ $ npm install
 Run the front-end  
 $ npm start
 
-Run the backend-end  
+Create the Database 
+$ npm run migrate
+$ npm run seed
+
+Run the server 
 $ npm run dev  
 
 This runs the app in the development mode.  
 Open http://localhost:3030 on your device to view the application in the browser.
+
+Log into the app
+- Email: monica.geller@gmail.com
+- Passwoed: 1234
 
 
 ## Deployemnt
