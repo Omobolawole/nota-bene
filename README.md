@@ -95,11 +95,7 @@ Open http://localhost:3030 on your device to view the application in the browser
 
 Log into the app
 - Email: monica.geller@gmail.com
-- Passwoed: 1234
-
-
-## Deployemnt
-Nota Bene is deployed. View current deployed version at: 
+- Passwoed: 1234 
 
 
 ## Author
