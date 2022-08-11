@@ -1,4 +1,4 @@
-![image](./screenshots/src/assets/logos/nb-logo-gradient.svg)
+![image](./src/assets/logos/nb-logo-gradient.svg)
 
 # **Nota Bene**
 
