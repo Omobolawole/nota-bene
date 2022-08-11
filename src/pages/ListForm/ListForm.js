@@ -4,7 +4,7 @@ import axios from 'axios';
 import uniqid from 'uniqid';
 import backIcon from '../../assets/icons/arrow_back.svg';
 import homeIcon from '../../assets/icons/home.svg';
-import './ListForm.scss';
+import './ListForm.scss';;
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
@@ -12,33 +12,32 @@ const ListForm = ({ user, status }) => {
     const [listLabel, setListLabel] = useState('');
     const [listContent, setListContent] = useState([]);
     const [listItem, setListItem] = useState('');
-    const [itemInputs, setItemInputs] = useState([]);
+    const [listItems, setListsItem] = useState([]);
     const [isError, setIsError] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const [isAxiosError, setIsAxiosError] = useState(false);
     const { listId } = useParams();
+    let [itemInputs, setItemInputs] = useState(0);
 
     const history = useHistory();
 
     const handleAddInput = () => {
-        itemInputs.push('input');
-        console.log(itemInputs);
-    }
+        setItemInputs(++itemInputs);
+    };
+
+    const handleRemoveInput = () => {
+        setItemInputs(--itemInputs);
+    };
 
     const handleChangeLabel = (event) => {
         setListLabel(event.target.value);
     };
 
-    const handleChangeContent = () => {
-        const updatedListContent = listContent.map((item) => {
-            return item = listItem;
-        })
-        setListContent(updatedListContent);
-    };
-
-    const handleChangeItem = (event) => {
-        setListItem(event.target.value);
-        handleChangeContent();
+    const handleContent = (event) => {
+        const updatedListItems = listItems.forEach((item) => {
+            setListItem(event.target.value);
+        });
+        setListContent(updatedListItems);
     };
 
     const isFormValid = () => {
@@ -104,10 +103,24 @@ const ListForm = ({ user, status }) => {
             axios
                 .post(`${SERVER_URL}/lists`, {
                     label: listLabel,
-                    item: listContent,
                     user_id: user.id
                 }) 
                 .then(() => {
+
+                    listContent.forEach((item) => {
+                        axios
+                            .post(`${SERVER_URL}/items`, {
+                                label: listLabel,
+                                user_id: user.id,
+                                list_id: listId,
+                                item: listItem,
+                                checked: false
+                            })
+                            .then((response) => {
+                                console.log(response);
+                            });
+                    });
+
                     setIsError(false);
                     setIsSuccess(true);
 
@@ -138,9 +151,13 @@ const ListForm = ({ user, status }) => {
                             const selectedItems = response.data;
                             setListContent(selectedItems);
 
-                            // selectedItems.forEach((item) =>{
-                            //     setListItem(item);
-                            // });
+                            const itemsArr = [];
+
+                            selectedItems.forEach((item) =>{
+                                itemsArr.push(item);
+                            });
+
+                            setListsItem(itemsArr);
                         })
                 })
                 .catch((error) => {
@@ -174,7 +191,10 @@ const ListForm = ({ user, status }) => {
                 <label className='list-form__title'>
                     Items
                 </label>
-                <p className='list-form__plus' onClick={handleAddInput}>{status === 'add' && '+'}</p>
+                <div className='list-form__add-remove'>
+                    <p className='list-form__plus' onClick={handleAddInput}>{status === 'add' && '+'}</p>
+                    <p className='list-form__minus' onClick={handleRemoveInput}>{status === 'add' && 'x'}</p>
+                </div>
                 {
                     listContent.map((item) => {
                         return (
@@ -186,9 +206,9 @@ const ListForm = ({ user, status }) => {
                                     type='text'
                                     placeholder='Add your item'
                                     className={!isError ? 'list-form__content' : 'list-form__content list-form__content--error'}
-                                    name='listContent'
+                                    name='listItem'
                                     value={item.item}
-                                    onChange={handleChangeItem}
+                                    onChange={handleContent}
                                 />
                             </li>
                         );
@@ -201,18 +221,19 @@ const ListForm = ({ user, status }) => {
                         type='text'
                         placeholder='Add your item'
                         className={!isError ? 'list-form__content' : 'list-form__content list-form__content--error'}
-                        name='listContent'
+                        name='listItem'
                     />
                 }
 
                 {
-                    itemInputs.forEach((input) => {
+                    Array.from(Array(itemInputs)).map((input) => {
                         return ( 
                             <input
+                                key={uniqid()}
                                 type='text'
                                 placeholder='Add your item'
                                 className={!isError ? 'list-form__content' : 'list-form__content list-form__content--error'}
-                                name='listContent'
+                                name='listItem'
                             />
                         );
                     })

@@ -35,17 +35,18 @@
         margin-bottom: 0.25rem;
     }
 
-    &__plus {
-        width: fit-content;
-        margin: 0;
-        font-weight: 700;
-        font-size: 1rem;
-        transition: transform 0.3s;
+    &__add-remove {
+        display: flex;
+        justify-content: space-between
+    }
 
-        &:hover {
-            transform: variables.$scale;
-            cursor: pointer;
-        }
+    &__plus {
+        @include mixins.add-item;
+    }
+
+    &__minus {
+        @include mixins.add-item;
+        color: colors.$error;
     }
 
     &__label {

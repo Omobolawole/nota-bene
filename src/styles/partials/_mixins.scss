@@ -43,8 +43,8 @@
     border-radius: 8px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
     transition: transform 0.3s;
-    width: 12.5rem;
     height: fit-content;
+    width: 15rem;
 
     &:hover {
         transform: variables.$scale-smaller;
@@ -99,8 +99,6 @@
 
 @mixin textarea {
     font-family: 'Jost';
-    // border: 1px solid colors.$primary-grey;
-    // border-radius: 4px;
     resize: none;
     outline: none;
     margin-bottom: 1.5rem;
@@ -135,6 +133,20 @@
     
     &:hover {
         background-color: colors.$primary-black;
+    }
+}
+
+@mixin add-item {
+    width: fit-content;
+    margin: 0;
+    font-weight: 700;
+    font-size: 2rem;
+    transition: transform 0.3s;
+    color: colors.$primary-color;
+
+    &:hover {
+        transform: variables.$scale;
+        cursor: pointer;
     }
 }
 

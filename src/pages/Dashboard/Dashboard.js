@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import LoginPage from '../LoginPage/LoginPage';
 import PageHeader from '../../components/PageHeader/PageHeader';
 import PageNav from '../../components/PageNav/PageNav';

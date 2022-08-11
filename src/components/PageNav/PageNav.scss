@@ -37,7 +37,7 @@
         }
 
         @include mixins.desktop {
-            width: 17%;
+            width: 12%;
             padding: 5rem 1.5rem 2.25rem 1.5rem;
         }
 
@@ -90,7 +90,6 @@
 
     &__list {
         display: flex;
-        // justify-content: space-between;
         list-style-type: none;
         padding: 0;
         margin-bottom: 0;
@@ -110,7 +109,6 @@
 
             &:hover {
                 background-color: colors.$primary-grey-lighter;
-                // border-radius: 50px;
                 border: none;
             }
         }
@@ -170,7 +168,6 @@
             transform: variables.$scale-small;
             cursor: pointer;
             background-color: colors.$primary-grey-lighter;
-            // border-radius: 50px;
             border: none;
         }
     }

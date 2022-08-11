@@ -9,7 +9,7 @@
 
     @include mixins.tablet {
         @include mixins.tablet-card;
-        width: 14rem;
+        margin-right: 2rem;
     }
 
     &__label {

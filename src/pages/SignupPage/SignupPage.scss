@@ -4,6 +4,7 @@
 .signup {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     padding: 3rem 0;
 
@@ -24,6 +25,7 @@
     &__auth-link {
         display: flex;
         align-items: center;
+        justify-content: center;
         text-decoration: none;
         color: colors.$primary-black;
         border: 1px solid colors.$primary-grey;
@@ -31,6 +33,7 @@
         padding: 0.275rem 1rem;
         width: 80%;
         font-size: 0.85rem;
+        max-width: 20rem;
 
         &:hover {
             background-color: colors.$secondary-grey;
@@ -42,14 +45,28 @@
         margin-right: 1rem;
     }
 
+    &__or-container {
+        margin: 0 auto;
+        width: 80%;
+        max-width: 20rem;
+    }
+
     &__or {
         color: colors.$primary-grey;
+        text-align: center;
+        background:
+            linear-gradient(colors.$primary-grey 0 0) left,
+            linear-gradient(colors.$primary-grey 0 0) right;
+        background-size: 40% 1px;
+        background-repeat: no-repeat;
+        margin: 1rem 0;
     }
 
     &__form{
         display: flex;
         flex-direction: column;
         width: 80%;
+        max-width: 20rem;
     }
 
     &__input {
@@ -96,5 +113,9 @@
             color: colors.$primary-color-darker;
             cursor: pointer;
         }
+    }
+
+    &__login-text {
+        margin-top: 0;
     }
 }

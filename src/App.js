@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 import SignupPage from './pages/SignupPage/SignupPage';
-import LoginPage from './pages/LoginPage/LoginPage';
 import Dashboard from './pages/Dashboard/Dashboard';
 import NotesPage from './pages/NotesPage/NotesPage';
 import NoteForm from './pages/NoteForm/NoteForm';
@@ -58,7 +57,7 @@ const App = () => {
             .post(`${SERVER_URL}/users/login`, loginInformation) 
             .then((response) => {
                 sessionStorage.setItem('authToken', response.data.token);
-                
+
                 setIsError(false);
                 handleLogin();
             })
@@ -125,7 +124,6 @@ const App = () => {
                     }
                 />
                 <Route path='/signup' component={SignupPage} />
-                <Route path='/login' component={LoginPage} />
                 <Route 
                     path='/notes' 
                     render={(routerProps) => 

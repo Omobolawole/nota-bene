@@ -1,38 +1,6 @@
-import React, { Component, useEffect } from 'react';
+import React, { Component } from 'react';
 import closeIcon from '../../assets/icons/close.svg';
 import './DeleteModal.scss';
-
-// const DeleteModal = ({ show, onClose, onConfirmDelete, selectedNote, type }) => {
-
-//     const handleConfirmDelete = () => {
-//         onConfirmDelete(selectedNote);
-//     }
-
-//     useEffect(() => {
-//         if (show) {
-//             document.body.style.overflow = "hidden";
-//         } else {
-//             document.body.style.overflow = "unset";
-//         }
-//     }, [])
-
-//     return (
-//         <div className='modal' onClick={onClose}>
-//             <div className='modal__container' onClick={(event) => event.stopPropagation()}>
-//                 <div>
-//                     <img src={closeIcon} alt='close icon' className='modal__close' onClick={onClose} />
-//                     <p className='modal__question'>{`Are you sure you want to delete this ${type}?`}</p>
-//                 </div>
-//                 <div className='modal__buttons'>
-//                     <button className='modal__button' onClick={onClose} >Cancel</button>
-//                     <button className='modal__button modal__button--delete' onClick={handleConfirmDelete}>Delete</button>
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// };
-
-
 
 class DeleteModal extends Component {
 

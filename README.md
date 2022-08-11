@@ -1,4 +1,4 @@
-![image](./screenshots/planning-draft.png)
+![image](./screenshots/header.JPG)
 
 # **Nota Bene**
 
@@ -12,37 +12,41 @@ The app requires the user to create an account and have authentication and autho
 The app is fully responsive and works well on mobile, tablet and desktop devices.
 
 
-## ***Tech Stack***: 
+## Tech Stack 
 ### **Front-end**
-1. React 
-2. Sass
-3. Axios
+- React 
+- Sass
+- Axios
 
-### **Back-end:**
-1. Node
-2. Express
+### **Back-end**
+- Node
+- Express
 
-### **Database:**
-1. MySQL
-2. Knex
+### **Database**
+- MySQL
+- Knex
 
-### **Auth:**
-1. Passport
-2. JWT
+### **Auth**
+- Passport
+- JWT
 
 
 ## Screenshots
-### - Dashboard
-![image](./screenshots/planning-draft.png)
-### - Notes
-![image](./screenshots/home.png)
-### - Lists
-![image](./screenshots/add-project.png)
-### - Details
-![image](./screenshots/add-task.png)
+### Sign Up
+![image](./screenshots/signup.JPG)
+### Log In
+![image](./screenshots/login.JPG)
+### Dashboard
+![image](./screenshots/dashboard.JPG)
+### Notes
+![image](./screenshots/notes.JPG)
+### Lists
+![image](./screenshots/lists.JPG)
+### Details
+![image](./screenshots/details.JPG)
 
 
-## Install
+## Installation
 Clone these repos  
 $ git clone https://github.com/anastasiaandu/nota-bene  
 $ git clone https://github.com/anastasiaandu/nota-bene-api  
@@ -64,7 +68,11 @@ This runs the app in the development mode.
 Open http://localhost:3030 on your device to view the application in the browser.
 
 
-## Authors
+## Deployemnt
+Nota Bene is deployed. View current deployed version at: 
+
+
+## Author
 Anastasia Andu - https://github.com/anastasiaandu
 
 

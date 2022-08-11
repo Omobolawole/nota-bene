@@ -15,16 +15,15 @@ const List = ({
     user, 
     list, 
     moveListItem, 
-    onDelete, 
-    // updateLists, 
-    itemsStatuses, 
-    itemsIds 
+    onDelete
     }) => {
 
     const [listItemsData, setListItemsData] = useState([]);
     const [isError, setIsError] = useState(false);
 
     const date = dateFormat(list.updated_at, "mmmm dS, yyyy");
+
+
 
     const [{ isDragging }, dragRef] = useDrag({
         type: 'item',
@@ -54,32 +53,24 @@ const List = ({
     const ref = useRef(null);
     const dragDropRef = dragRef(dropRef(ref));
 
-    const updateStatus = (item) => {
-        if (user && item) {
-            axios
-                .put(`${SERVER_URL}/lists/${user.id}/list/${itemsIds[item]}`, {
-                    label: list.label,
-                    item: item,
-                    checked: itemsStatuses[item],
-                    user_id: user.id
-                }) 
-                .then((response) => {
-                    console.log(response);
-                    setIsError(true);
-                })
-        }
+    const handleItemToggle = () => {
+        const updatedItems = listItemsData.map((item) => {
+            if (item.checked === 0 ) {
+                return {...item, checked: true}
+            } else {
+                return {...item, checked: false}
+            }
+        });
+
+        setListItemsData(updatedItems);
     };
 
-    const handleItemToggle = (item) => {
-        // itemsStatuses[item] = !itemsStatuses[item];
-        // updateStatus(item);
-    };
+    const handleItemsCheck = () => {
+        const updatedItems = listItemsData.map((item) => {
+            return {...item, checked: true}
+        });
 
-    const handleItemsCheck = (items) => {
-        // items.forEach(item => {
-        //     itemsStatuses[item] = true;
-        //     updateStatus(item);
-        // });
+        setListItemsData(updatedItems);
     };
 
     const handleClick = () => {
@@ -104,6 +95,10 @@ const List = ({
         updateListItems();
     }, []);
 
+    if (isError) {
+        return <p>Loading...</p>
+    }
+
     return (
         <article className={!isDragging ? 'list' : 'list list--dragging'} ref={dragDropRef}>
             <div className='list__heading'>
@@ -122,10 +117,11 @@ const List = ({
                                     type='checkbox' 
                                     className='list__input' 
                                     id='list-item' 
-                                    onClick={() => handleItemToggle(item)} 
+                                    checked={handleItemToggle && 'checked'}
+                                    onChange={() => handleItemToggle(item)} 
                                 />
                                 <label htmlFor='list-item' className='list__item'>
-                                    <p className={!item.checked ? 'list__text' : 'list__text list__text--checked'}>
+                                    <p className={!handleItemToggle ? 'list__text' : 'list__text list__text--checked'}>
                                         {item.item}
                                     </p>
                                 </label>
@@ -134,7 +130,7 @@ const List = ({
                     })
                 }
             </ul>
-            <button className='list__check-all' onClick={() => handleItemsCheck(list.items)} >Check All Boxes</button>
+            <button className='list__check-all' onClick={handleItemsCheck} >Check All Boxes</button>
             <div className='list__icons'>
                 <Link to={`/list/${list.id}/edit`}>
                     <img src={editIcon} alt='edit icon' className='list__icon' />

@@ -18,7 +18,6 @@ const DetailsPage = ({ user }) => {
     const [selectedNote, setSelecetedNote] = useState(null);
 
     const history = useHistory();
-
     
     const handleSearchChange = (event) => {
         setNewSearch(event.target.value);

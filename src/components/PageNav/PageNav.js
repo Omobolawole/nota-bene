@@ -77,8 +77,8 @@ const PageNav = ({ onShow, onHide, onLogout, onAdd, onOpen }) => {
                             <p className='links__text'>Account</p>
                         </NavLink>
                     </li>
-                    <li className='links__hidden-list-item'>
-                        <a href={`${SERVER_URL}/auth/logout`} onClick={onLogout} className='links__hidden-link'>
+                    <li className='links__hidden-list-item' onClick={onLogout}>
+                        <a href={`${SERVER_URL}/auth/logout`} className='links__hidden-link'>
                             <img src={logoutIcon} alt='logout icon' className='links__logout-tablet' />
                             <p className='links__text'>Logout</p>
                         </a>

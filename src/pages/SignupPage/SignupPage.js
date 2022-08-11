@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import logoImage from '../../assets/logos/nb-logo-gradient.svg';
 import googleImage from '../../assets/images/google-logo.webp';
@@ -11,6 +11,12 @@ const SignupPage = () => {
     const [isSuccess, setIsSuccess] = useState(false);
     const [isError, setIsError] = useState(false);
     const [isAxiosError, setIsAxiosError] = useState(false);
+
+    const history = useHistory();
+
+    const handleLogin = () => {
+        history.push('/');
+    };
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -56,7 +62,9 @@ const SignupPage = () => {
                 <img src={googleImage} alt='google logo' className='signup__auth-logo'/>
                 Sign Up with Google
             </a>
-            <p className='signup__or'>or</p>
+            <div className='signup__or-container'>
+                <p className='signup__or'>or</p>
+            </div>
             <form className='signup__form' onSubmit={handleSubmit}>
                 <label className='signup__label'>
                     <input
@@ -98,7 +106,7 @@ const SignupPage = () => {
                 <button className='signup__button'>Continue</button>
             </form>
             <p className='signup__login'>Have an account?</p>
-            <Link to='/login' className='signup__login-link'>Log In</Link>
+            <p className='signup__login-link' onClick={handleLogin}>Log In</p>
         </main>
     );
 };
