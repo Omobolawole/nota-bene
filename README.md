@@ -1,4 +1,4 @@
-![image](./screenshots/header.JPG)
+![image](./screenshots/src/assets/logos/nb-logo-gradient.svg)
 
 # **Nota Bene**
 
@@ -33,7 +33,7 @@ The app is fully responsive and works well on mobile, tablet and desktop devices
 
 ## Screenshots
 ### Sign Up
-![image](./screenshots/src/assets/logos/nb-logo-gradient.svg)
+![image](./screenshots/signup.JPG)
 ### Log In
 ![image](./screenshots/login.JPG)
 ### Dashboard
