@@ -108,14 +108,11 @@
         text-decoration: none;
         font-weight: 700;
         color: colors.$primary-color;
+        margin-top: 0;
 
         &:hover {
             color: colors.$primary-color-darker;
             cursor: pointer;
         }
-    }
-
-    &__login-text {
-        margin-top: 0;
     }
 }

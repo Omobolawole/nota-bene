@@ -23,8 +23,6 @@ const List = ({
 
     const date = dateFormat(list.updated_at, "mmmm dS, yyyy");
 
-
-
     const [{ isDragging }, dragRef] = useDrag({
         type: 'item',
         item: { index },
