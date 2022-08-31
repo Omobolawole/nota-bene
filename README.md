@@ -55,21 +55,29 @@ Go into the repos on your device
 $ cd nota-bene  
 $ cd nota-bene-api
 
-Install dependencies  
+Install dependencies in both client and server
 $ npm install
+
+Configure the database by running data migration and seed
+$ npm run migrate
+$ npm run seed
+
+Configure the server to work with the database
+$ Create a config file called '.env' in server
+$ Copy the info from the 'env.sample' file into '.env
+
+Configure the client to work with the server
+$ Create a config file called '.env' in client
+$ Copy the info from the 'env.sample' file into '.env
 
 Run the front-end  
 $ npm start
 
 Run the backend-end  
-$ npm run dev  
+$ npm run dev
 
 This runs the app in the development mode.  
 Open http://localhost:3030 on your device to view the application in the browser.
-
-
-## Deployemnt
-Nota Bene is deployed. View current deployed version at: 
 
 
 ## Author
