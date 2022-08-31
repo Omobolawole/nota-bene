@@ -80,7 +80,6 @@ const App = () => {
                 .then((response) => {
                     setUser(response.data);
                     setIsAuthenticating(false);
-                    handleLogin();
                 })
                 .catch((error) => {
                     console.log(`Error Authenticating: ${error}`);
@@ -91,7 +90,6 @@ const App = () => {
                 .then((response) => {
                     setUser(response.data);
                     setIsAuthenticating(false);
-                    handleLogin();
                 })
                 .catch(() => {
                     setIsAuthenticating(false);

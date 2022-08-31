@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory, Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import logoImage from '../../assets/logos/nb-logo-gradient.svg';
 import googleImage from '../../assets/images/google-logo.webp';
@@ -32,12 +32,12 @@ const SignupPage = () => {
             username: `${firstName} ${lastName}`,
             email: email,
             password: password
-        }
+        };
 
         if (!firstName || !lastName || !email || !password) {
             setIsError(true);
-            return false;
-        }
+            return;
+        };
 
         axios
             .post(`${SERVER_URL}/users/register`, userInformation) 
