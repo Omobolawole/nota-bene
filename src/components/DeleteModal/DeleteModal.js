@@ -5,7 +5,7 @@ import './DeleteModal.scss';
 class DeleteModal extends Component {
 
     handleConfirmDelete = () => {
-        this.props.onConfirmDelete(this.props.selectedNote);
+        this.props.onConfirmDelete(this.props.selectedContent);
     }
         
     componentDidUpdate() {

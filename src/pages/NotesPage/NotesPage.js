@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useHistory, Link } from 'react-router-dom';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import axios from 'axios';
 import DeleteModal from '../../components/DeleteModal/DeleteModal';
-import backIcon from '../../assets/icons/arrow_back.svg';
+import ContentNav from '../../components/ContentNav/ContentNav';
 import Note from '../../components/Note/Note';
 import './NotesPage.scss';
 
@@ -15,9 +14,7 @@ const NotesPage = ({ user }) => {
     const [isError, setIsError] = useState(false);
     const [newSearch, setNewSearch] = useState('');
     const [showModal, setShowModal] = useState(false);
-    const [selectedNote, setSelecetedNote] = useState(null);
-
-    const history = useHistory();
+    const [selectedContent, setSelectedContent] = useState(null);
 
     const handleSearchChange = (event) => {
         setNewSearch(event.target.value);
@@ -46,7 +43,7 @@ const NotesPage = ({ user }) => {
 
     const handleDelete = (id) => {
         setShowModal(true);
-        setSelecetedNote(id);
+        setSelectedContent(id);
     };
 
     const handleCancel = () => {
@@ -97,30 +94,12 @@ const NotesPage = ({ user }) => {
                 show={showModal}
                 onClose={handleCancel}
                 onConfirmDelete={handleConfirmDelete}
-                selectedNote={selectedNote}
+                selectedContent={selectedContent}
                 type='note'
             />
             <DndProvider backend={HTML5Backend}>
                 <main className='notes'>
-                    <div className='notes__nav'>
-                        <img src={backIcon} alt='back icon' className='notes__back' onClick={history.goBack}/>
-                        <form className='notes__form'>
-                            <input 
-                                type='text'
-                                value={newSearch}
-                                className='notes__search-input'
-                                placeholder='Search...'
-                                onChange={handleSearchChange}
-                            />
-                        </form>
-                        <Link to='/note/add' className='notes__link'>
-                            <div className='notes__add'>
-                                <p className='notes__add-text' >
-                                    + New Note
-                                </p>
-                            </div>
-                        </Link>
-                    </div>
+                    <ContentNav newSearch={newSearch} handleSearchChange={handleSearchChange} type='New Note' />
                     <div className='notes__container'>
                         {
                             !newSearch 

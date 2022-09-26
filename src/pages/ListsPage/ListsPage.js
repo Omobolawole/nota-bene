@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useHistory, Link } from 'react-router-dom';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import axios from 'axios';
 import DeleteModal from '../../components/DeleteModal/DeleteModal';
-import backIcon from '../../assets/icons/arrow_back.svg';
+import ContentNav from '../../components/ContentNav/ContentNav';
 import List from '../../components/List/List';
 import './ListsPage.scss';
 
@@ -15,9 +14,7 @@ const ListsPage = ({ user }) => {
     const [isError, setIsError] = useState(false);
     const [newSearch, setNewSearch] = useState('');
     const [showModal, setShowModal] = useState(false);
-    const [selectedList, setSelecetedList] = useState(null);
-
-    const history = useHistory();
+    const [selectedContent, setSelectedContent] = useState(null);
 
     const handleSearchChange = (event) => {
         setNewSearch(event.target.value);
@@ -46,7 +43,7 @@ const ListsPage = ({ user }) => {
 
     const handleDelete = (id) => {
         setShowModal(true);
-        setSelecetedList(id);
+        setSelectedContent(id);
     };
 
     const handleCancel = () => {
@@ -97,30 +94,12 @@ const ListsPage = ({ user }) => {
                 show={showModal}
                 onClose={handleCancel}
                 onConfirmDelete={handleConfirmDelete}
-                selectedList={selectedList}
+                selectedContent={selectedContent}
                 type='list'
             />
             <DndProvider backend={HTML5Backend}>
                 <main className='lists'>
-                    <div className='lists__nav'>
-                        <img src={backIcon} alt='back icon' className='lists__back' onClick={history.goBack}/>
-                        <form className='lists__form'>
-                            <input 
-                                type='text'
-                                value={newSearch}
-                                className='lists__search-input'
-                                placeholder='Search...'
-                                onChange={handleSearchChange}
-                            />
-                        </form>
-                        <Link to='/list/add' className='lists__link'>
-                            <div className='lists__add'>
-                                <p className='lists__add-text' >
-                                    + New List
-                                </p>
-                            </div>
-                        </Link>
-                    </div>
+                    <ContentNav newSearch={newSearch} handleSearchChange={handleSearchChange} type='New List' />
                     <div className='lists__container'>
                         {   
                             !newSearch 

@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useHistory, Link } from 'react-router-dom';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import axios from 'axios';
 import DeleteModal from '../../components/DeleteModal/DeleteModal';
-import backIcon from '../../assets/icons/arrow_back.svg';
+import ContentNav from '../../components/ContentNav/ContentNav';
 import Detail from '../../components/Detail/Detail';
 import './DetailsPage.scss';
 
@@ -15,9 +14,7 @@ const DetailsPage = ({ user }) => {
     const [isError, setIsError] = useState(false);
     const [newSearch, setNewSearch] = useState('');
     const [showModal, setShowModal] = useState(false);
-    const [selectedNote, setSelecetedNote] = useState(null);
-
-    const history = useHistory();
+    const [selectedContent, setSelectedContent] = useState(null);
     
     const handleSearchChange = (event) => {
         setNewSearch(event.target.value);
@@ -46,7 +43,7 @@ const DetailsPage = ({ user }) => {
 
     const handleDelete = (id) => {
         setShowModal(true);
-        setSelecetedNote(id);
+        setSelectedContent(id);
     };
 
     const handleCancel = () => {
@@ -99,30 +96,12 @@ const DetailsPage = ({ user }) => {
                 show={showModal}
                 onClose={handleCancel}
                 onConfirmDelete={handleConfirmDelete}
-                selectedNote={selectedNote}
+                selectedContent={selectedContent}
                 type='detail'
             />
             <DndProvider backend={HTML5Backend}>
                 <main className='details'>
-                    <div className='details__nav'>
-                        <img src={backIcon} alt='back icon' className='details__back' onClick={history.goBack}/>
-                        <form className='details__form'>
-                            <input 
-                                type='text'
-                                value={newSearch}
-                                className='details__search-input'
-                                placeholder='Search...'
-                                onChange={handleSearchChange}
-                            />
-                        </form>
-                        <Link to='/detail/add' className='details__link'>
-                            <div className='details__add'>
-                                <p className='details__add-text' >
-                                    + New Detail
-                                </p>
-                            </div>
-                        </Link>
-                    </div>
+                    <ContentNav newSearch={newSearch} handleSearchChange={handleSearchChange} type='New Detail' />
                     <div className='details__container'>
                         {
                             !newSearch

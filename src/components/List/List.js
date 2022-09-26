@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import uniqid from 'uniqid';
+// import uniqid from 'uniqid';
 import dateFormat from "dateformat";
 import { useDrag, useDrop } from 'react-dnd';
 import axios from 'axios';
+import Item from '../Item/Item';
 import editIcon from '../../assets/icons/edit.svg';
 import deleteIcon from '../../assets/icons/delete.svg';
 import './List.scss';
@@ -107,28 +108,17 @@ const List = ({
                 {
                     listItemsData.map((item) => {
                         return (
-                            <li 
-                                key={uniqid()} 
-                                className='list__group'
-                            >
-                                <input 
-                                    type='checkbox' 
-                                    className='list__input' 
-                                    id='list-item' 
-                                    checked={handleItemToggle && 'checked'}
-                                    onChange={() => handleItemToggle(item)} 
-                                />
-                                <label htmlFor='list-item' className='list__item'>
-                                    <p className={!handleItemToggle ? 'list__text' : 'list__text list__text--checked'}>
-                                        {item.item}
-                                    </p>
-                                </label>
-                            </li>
+                            <Item 
+                                key={item.id}
+                                item={item}
+                                listLabel={list.label}
+                                listId={list.id}
+                            />
                         );
                     })
                 }
             </ul>
-            <button className='list__check-all' onClick={handleItemsCheck} >Check All Boxes</button>
+            <button className='list__check-all' onClick={handleItemsCheck}>Check All Boxes</button>
             <div className='list__icons'>
                 <Link to={`/list/${list.id}/edit`}>
                     <img src={editIcon} alt='edit icon' className='list__icon' />

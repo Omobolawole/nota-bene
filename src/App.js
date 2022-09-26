@@ -46,12 +46,12 @@ const App = () => {
         const loginInformation = {
             email: email,
             password: password
-        }
+        };
 
         if (!email || !password) {
             setIsError(true);
             return;
-        }
+        };
 
         axios
             .post(`${SERVER_URL}/users/login`, loginInformation) 
@@ -80,6 +80,7 @@ const App = () => {
                 .then((response) => {
                     setUser(response.data);
                     setIsAuthenticating(false);
+                    handleLogin();
                 })
                 .catch((error) => {
                     console.log(`Error Authenticating: ${error}`);
@@ -90,6 +91,7 @@ const App = () => {
                 .then((response) => {
                     setUser(response.data);
                     setIsAuthenticating(false);
+                    handleLogin();
                 })
                 .catch(() => {
                     setIsAuthenticating(false);

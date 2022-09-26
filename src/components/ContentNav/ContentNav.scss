@@ -1,0 +1,76 @@
+@use '../../styles/partials/colors';
+@use '../../styles/partials/mixins';
+@use '../../styles/partials/variables';
+
+.content{
+
+    &__nav {
+        @include mixins.mobile-nav;
+    }
+
+    &__link {
+        text-decoration: none;
+        margin-left: 2rem;
+    }
+
+    &__back {
+        width: 1.5rem;
+        transition: transform 0.3s;
+
+        &:hover {
+            transform: variables.$scale;
+            cursor: pointer;
+        }
+    }
+
+    &__container {
+        display: flex;
+        align-items: center;
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        margin-top: 1rem;
+    }
+
+    &__search-input {
+        @include mixins.search-input;
+        background-image: url('../../assets/icons/search.svg');
+        width: 9rem;
+
+        @include mixins.tablet {
+            height: 2.375rem;
+            width: 15rem;
+            font-size: 0.875rem;
+        }
+
+        @include mixins.desktop {
+            width: 17rem;
+        }
+    }
+
+    &__add {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        width: 100%;
+    }
+
+    &__add-text {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1rem;
+        padding: 0.5rem;
+        color: colors.$primary-white;
+        background-color: colors.$primary-color;
+        margin: 0;
+        border-radius: 4px;
+
+        &:hover {
+            background-color: colors.$primary-color-darker;
+            cursor: pointer;
+        }
+    }
+}
